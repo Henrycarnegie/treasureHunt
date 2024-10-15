@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 export default {
   content: [
     "./resources/**/*.blade.php",
@@ -7,8 +9,12 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['InterVariable', ...defaultTheme.fontFamily.sans],
+        bangers: ['Bangers', 'cursive'],
+      },
       backgroundImage: {
-        'game-map': "url('/public/img/game-map.png')"
+        'game-map': "url('/public/img/game-map-step.png')"
       },
       gradientColorStops: {
         'radial-black-60' : "#000000",
