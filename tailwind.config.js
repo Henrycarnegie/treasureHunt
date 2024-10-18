@@ -6,6 +6,12 @@ export default {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
+    './app/**/*.php',
+    './resources/**/*.html',
+    './resources/**/*.jsx',
+    './resources/**/*.ts',
+    './resources/**/*.tsx',
+    './resources/**/*.twig',
   ],
   theme: {
     extend: {
@@ -32,19 +38,9 @@ export default {
             backgroundColor: ['active'],
         }
     },
-    content: [
-        './app/**/*.php',
-        './resources/**/*.html',
-        './resources/**/*.js',
-        './resources/**/*.jsx',
-        './resources/**/*.ts',
-        './resources/**/*.tsx',
-        './resources/**/*.php',
-        './resources/**/*.vue',
-        './resources/**/*.twig',
-    ],
-    plugins: [
-        require('@tailwindcss/forms'),
-        require('@tailwindcss/typography'),
-    ],
+  },
+  plugins: [
+      require('@tailwindcss/forms'),
+      require('@tailwindcss/typography'),
+  ],
 }

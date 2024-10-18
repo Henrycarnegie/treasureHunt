@@ -8,6 +8,13 @@ use App\Livewire\Auth\Passwords\Email;
 use App\Livewire\Auth\Passwords\Reset;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Verify;
+use App\Livewire\Guru\GuruIndex;
+use App\Livewire\Guru\Level1;
+use App\Livewire\Guru\Level2;
+use App\Livewire\Guru\Level3;
+use App\Livewire\Guru\Level4;
+use App\Livewire\Guru\Level5;
+use App\Livewire\HomePage;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,43 +28,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'homepage')->name('home');
-
 Route::middleware('guest')->group(function () {
-    Route::get('login', Login::class)
-        ->name('login');
+    Route::get('/', Login::class)
+    ->name('login');
 });
 
 
 Route::middleware('auth')->group(function () {
-        Route::post('logout', LogoutController::class)
-        ->name('logout');
+    // Route::middleware(['role:murid'])->name('murid.')->group(function () {
+        Route::get('home', HomePage::class)
+        ->name('home');
+    // });
+
+
+    Route::get('logout', LogoutController::class)
+    ->name('logout');
 });
 
-Route::get('/guru', function () {
-    return view('guru.index');
+
+Route::prefix('guru')->name('guru.')->group(function () {
+    Route::get('/', GuruIndex::class)->name("dashboard");
+
+    Route::get('level1', Level1::class)->name('level1');
+
+    Route::get('level2', Level2::class)->name('level2');
+
+    Route::get('level3', Level3::class)->name('level3');
+
+    Route::get('level4', Level4::class)->name('level4');
+
+    Route::get('level5', Level5::class)->name('level5');
 });
 
-Route::get('/guru/dashboard', function () {
-    return view('guru.index');
-})->name('guru.dashboard');
 
-Route::get('/guru/level1', function () {
-    return view('guru.level1');
-})->name('guru.level1');
 
-Route::get('/guru/level2', function () {
-    return view('guru.level2');
-})->name('guru.level2');
-
-Route::get('/guru/level3', function () {
-    return view('guru.level3');
-})->name('guru.level3');
-
-Route::get('/guru/level4', function () {
-    return view('guru.level4');
-})->name('guru.level4');
-
-Route::get('/guru/level5', function () {
-    return view('guru.level5');
-})->name('guru.level5');
