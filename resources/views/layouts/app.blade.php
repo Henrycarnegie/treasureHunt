@@ -1,3 +1,5 @@
+@include('sweetalert::alert')
+
 @extends('layouts.base')
 
 @section('body')
@@ -7,3 +9,13 @@
         {{ $slot }}
     @endisset
 @endsection
+
+@if (session('success'))
+    <script>
+        Swal.fire(
+          'Success!',
+          '{{ session('success') }}',
+          'success'
+        )
+    </script>
+@endif

@@ -19,30 +19,41 @@
                     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                         <ul class="space-y-2 font-medium">
                             <li>
-                                <x-nav-link href="{{ route('guru.dashboard') }}" icon="iconDashboard" :active="request()->routeIs('guru.dashboard')">Dashboard</x-nav-link>
+                                <x-nav-link href="{{ route('guru.dashboard') }}" icon="iconDashboard" :active="request()->routeIs('guru.dashboard')"
+                                    class="text-white">Dashboard</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link href="{{ route('guru.level1') }}" icon="iconLevel1" :active="request()->routeIs('guru.level1')">Level 1</x-nav-link>
+                                <x-nav-link href="{{ route('guru.level1') }}" icon="iconLevel1" :active="request()->routeIs('guru.level1')"
+                                    class="text-white">Level 1</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link href="{{ route('guru.level2') }}" icon="iconLevel2" :active="request()->routeIs('guru.level2')">Level 2</x-nav-link>
+                                <x-nav-link href="{{ route('guru.level2') }}" icon="iconLevel2" :active="request()->routeIs('guru.level2')"
+                                    class="text-white">Level 2</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link href="{{ route('guru.level3') }}" icon="iconLevel3" :active="request()->routeIs('guru.level3')">Level 3</x-nav-link>
+                                <x-nav-link href="{{ route('guru.level3') }}" icon="iconLevel3" :active="request()->routeIs('guru.level3')"
+                                    class="text-white">Level 3</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link href="{{ route('guru.level4') }}" icon="iconLevel4" :active="request()->routeIs('guru.level4')">Level 4</x-nav-link>
+                                <x-nav-link href="{{ route('guru.level4') }}" icon="iconLevel4" :active="request()->routeIs('guru.level4')"
+                                    class="text-white">Level 4</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link href="{{ route('guru.level5') }}" icon="iconLevel5" :active="request()->routeIs('guru.level5')">Level 5</x-nav-link>
-                            </li>                            
+                                <x-nav-link href="{{ route('guru.level5') }}" icon="iconLevel5" :active="request()->routeIs('guru.level5')"
+                                    class="text-white">Level 5</x-nav-link>
+                            </li>
+                            <li>
+                                <x-nav-link href="{{ route('guru.logout') }}" icon="iconLogout" :active="request()->routeIs('guru.logout')"
+                                    class="text-red-500">Logout</x-nav-link>
+                            </li>
                         </ul>
                     </div>
                 </aside>
                 <a href="" class="flex ms-2 md:me-24">
                     <img src="{{ asset('/img/logo.svg') }}" class="h-8 me-3" alt="Treasure-Hunt Logo" />
-                    <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                        Treasure-Hunt
+                    <span
+                        class="font-bangers tracking-wider text-xl font-bold text-cyan-200 self-center sm:text-2xl whitespace-nowrap">
+                        <span class="text-amber-600">Treasure</span> Hunt
                     </span>
                 </a>
             </div>
@@ -62,3 +73,51 @@
         </div>
     </div>
 </nav>
+
+<!-- Sidebar -->
+<aside
+    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+    aria-label="Sidebar">
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <x-nav-link href="{{ route('guru.dashboard') }}" icon="iconDashboard" :active="request()->routeIs('guru.dashboard')"
+                    class="text-white">Dashboard</x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.respondent') }}" icon="iconRespondent" :active="request()->routeIs('guru.respondent')" class="text-white">
+                    Jawaban
+                </x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.level1') }}" icon="iconLevel1" :active="request()->routeIs('guru.level1')" class="text-white">
+                    Level 1
+                </x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.level2') }}" icon="iconLevel2" :active="request()->routeIs('guru.level2')" class="text-white">
+                    Level 2
+                </x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.level3') }}" icon="iconLevel3" :active="request()->routeIs('guru.level3')" class="text-white">
+                    Level 3
+                </x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.level4') }}" icon="iconLevel4" :active="request()->routeIs('guru.level4')" class="text-white">
+                    Level 4
+                </x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.level5') }}" icon="iconLevel5" :active="request()->routeIs('guru.level5')" class="text-white">
+                    Level 5
+                </x-nav-link>
+            </li>
+            <li>
+                <x-nav-link href="{{ route('guru.logout') }}" icon="iconLogout" :active="request()->routeIs('guru.logout')"
+                    class="text-red-500">Logout</x-nav-link>
+            </li>
+        </ul>
+    </div>
+</aside>

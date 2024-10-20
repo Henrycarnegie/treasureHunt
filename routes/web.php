@@ -14,6 +14,7 @@ use App\Livewire\Guru\Level2;
 use App\Livewire\Guru\Level3;
 use App\Livewire\Guru\Level4;
 use App\Livewire\Guru\Level5;
+use App\Livewire\Guru\Respondent;
 use App\Livewire\HomePage;
 use Illuminate\Support\Facades\Route;
 
@@ -58,6 +59,10 @@ Route::prefix('guru')->name('guru.')->group(function () {
     Route::get('level4', Level4::class)->name('level4');
 
     Route::get('level5', Level5::class)->name('level5');
+
+    Route::get('respondent', Respondent::class)->name('respondent');
+
+    Route::get('logout', Level5::class)->name('logout');
 });
 
 
