@@ -25,7 +25,7 @@
                 <x-respondent-soal infoSoal="3">
                     <x-response responseType="pilgan-with-upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
-                <x-respondent-soal infoSoal="3">
+                <x-respondent-soal infoSoal="4">
                     <x-response responseType="pilgan-with-upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
             </x-respondent-level>
@@ -41,7 +41,7 @@
                 <x-respondent-soal infoSoal="3">
                     <x-response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
-                <x-respondent-soal infoSoal="3">
+                <x-respondent-soal infoSoal="4">
                     <x-response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
             </x-respondent-level>
@@ -57,7 +57,7 @@
                 <x-respondent-soal infoSoal="3">
                     <x-response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
-                <x-respondent-soal infoSoal="3">
+                <x-respondent-soal infoSoal="4">
                     <x-response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
             </x-respondent-level>
@@ -73,7 +73,7 @@
                 <x-respondent-soal infoSoal="3">
                     <x-response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
-                <x-respondent-soal infoSoal="3">
+                <x-respondent-soal infoSoal="4">
                     <x-response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
             </x-respondent-level>
@@ -89,7 +89,7 @@
                 <x-respondent-soal infoSoal="3">
                     <x-response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
-                <x-respondent-soal infoSoal="3">
+                <x-respondent-soal infoSoal="4">
                     <x-response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
             </x-respondent-level>
