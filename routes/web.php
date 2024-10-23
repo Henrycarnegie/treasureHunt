@@ -34,36 +34,41 @@ Route::middleware('guest')->group(function () {
     ->name('login');
 });
 
-
 Route::middleware('auth')->group(function () {
-    // Route::middleware(['role:murid'])->name('murid.')->group(function () {
+
+    Route::middleware(['role:murid'])->name('murid.')->prefix('murid')->group(function () {
         Route::get('home', HomePage::class)
         ->name('home');
-    // });
+    });
+
+    Route::middleware(['role:guru'])->name('guru.')->prefix('guru')->group(function () {
+
+        Route::get('/', GuruIndex::class)
+        ->name("dashboard");
+
+        Route::get('level1', Level1::class)
+        ->name('level1');
+
+        Route::get('level2', Level2::class)
+        ->name('level2');
+
+        Route::get('level3', Level3::class)
+        ->name('level3');
+
+        Route::get('level4', Level4::class)
+        ->name('level4');
+
+        Route::get('level5', Level5::class)
+        ->name('level5');
+
+        Route::get('respondent', Respondent::class)
+        ->name('respondent');
+
+        Route::get('logout', Level5::class)
+        ->name('logout');
+    });
 
 
     Route::get('logout', LogoutController::class)
     ->name('logout');
 });
-
-
-Route::prefix('guru')->name('guru.')->group(function () {
-    Route::get('/', GuruIndex::class)->name("dashboard");
-
-    Route::get('level1', Level1::class)->name('level1');
-
-    Route::get('level2', Level2::class)->name('level2');
-
-    Route::get('level3', Level3::class)->name('level3');
-
-    Route::get('level4', Level4::class)->name('level4');
-
-    Route::get('level5', Level5::class)->name('level5');
-
-    Route::get('respondent', Respondent::class)->name('respondent');
-
-    Route::get('logout', Level5::class)->name('logout');
-});
-
-
-
