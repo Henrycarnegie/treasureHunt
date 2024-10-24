@@ -23,6 +23,11 @@
                                     class="text-white">Dashboard</x-nav-link>
                             </li>
                             <li>
+                                <x-nav-link href="{{ route('guru.respondent') }}" icon="iconRespondent" :active="request()->routeIs('guru.respondent')" class="text-white">
+                                    Jawaban
+                                </x-nav-link>
+                            </li>
+                            <li>
                                 <x-nav-link href="{{ route('guru.level1') }}" icon="iconLevel1" :active="request()->routeIs('guru.level1')"
                                     class="text-white">Level 1</x-nav-link>
                             </li>
