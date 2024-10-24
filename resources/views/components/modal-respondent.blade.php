@@ -17,16 +17,16 @@
             {{-- Level 1 --}}
             <x-respondent-level infoLevel="1">
                 <x-respondent-soal infoSoal="1">
-                    <x-response responseType="pilgan-with-upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
+                    <x-response responseType="pilganWithUpload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
                 <x-respondent-soal infoSoal="2">
-                    <x-response responseType="pilgan-with-upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
+                    <x-response responseType="pilganWithUpload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
                 <x-respondent-soal infoSoal="3">
-                    <x-response responseType="pilgan-with-upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
+                    <x-response responseType="pilganWithUpload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
                 <x-respondent-soal infoSoal="4">
-                    <x-response responseType="pilgan-with-upload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
+                    <x-response responseType="pilganWithUpload" question="Berapa hasil dari 2+2?" answer="4"></x-response>
                 </x-respondent-soal>
             </x-respondent-level>
             

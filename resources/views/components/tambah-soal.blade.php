@@ -12,21 +12,7 @@
             <div class="w-full flex justify-end">
                 <x-icon icon="iconClose" @click="tambahSoalOpen = false"></x-icon>
             </div>
-            <!-- Input Pertanyaan -->
-            <div class="w-full max-w-sm min-w-[200px]">
-                <label class="block mb-2 text-sm text-slate-600">Pertanyaan</label>
-                <input type="text"
-                    class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                    placeholder="Masukan pertanyaan" />
-            </div>
-
-            <!-- Input Jawaban -->
-            <div class="w-full max-w-sm min-w-[200px]">
-                <label class="block mb-2 text-sm text-slate-600">Jawaban</label>
-                <input type="text"
-                    class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                    placeholder="Masukan jawaban" />
-            </div>
+            {{ $slot }}
         </div>
 
         <!-- Simpan Soal Button -->

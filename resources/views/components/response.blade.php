@@ -1,7 +1,7 @@
 @props([
     'question' => 'Pertanyaan tidak tersedia',
     'answer' => 'Jawaban tidak tersedia',
-    'responseType' => 'pilgan',
+    'responseType',
 ])
 
 @if ($responseType === 'pilgan')
@@ -11,7 +11,7 @@
     <span class="text-sm">Jawaban =
         <span class="text-sm text-white">{{ $answer }}</span>
     </span>
-@elseif ($responseType === 'pilgan-with-upload')
+@elseif ($responseType === 'pilganWithUpload')
     <span class="text-sm">Pertanyaan =
         <span class="text-sm text-white">{{ $question }}</span>
     </span>
@@ -44,11 +44,3 @@
         </div>
     </div>
 @endif
-
-{{-- 
-    Level 1 : Pilihan ganda & Upload foto || Koreksi oleh guru
-    Level 2 : Pilihan ganda || Koreksi oleh sistem
-    Level 3 : Upload foto || Koreksi oleh guru
-    Level 4 : Upload foto || Koreksi oleh guru
-    Level 5 : Pilihan ganda || Koreksi oleh sistem
---}}

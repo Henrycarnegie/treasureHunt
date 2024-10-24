@@ -22,5 +22,5 @@
     </button>
 
     <!-- Modal Tambah Soal -->
-    <x-tambah-soal></x-tambah-soal>
+    <x-tambah-soal>{{ $slot }}</x-tambah-soal>
 </div>
