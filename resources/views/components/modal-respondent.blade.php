@@ -7,7 +7,7 @@
 <div x-data="{ isOpen: false }" class="col-span-2">
     <div {{ $attributes->merge(['class' => $defaultClasses]) }}
         :class="{ '{{ $activeClasses }}': isOpen, '{{ $hoverClasses }}': !isOpen }" @click="isOpen = !isOpen"
-        @click.outside="isOpen = false">
+        @click.outside="isOpen = false" x-cloak>
         <span class="text-md font-medium">
             {{ $slot }}
         </span>
