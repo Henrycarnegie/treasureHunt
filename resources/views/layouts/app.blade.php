@@ -12,12 +12,12 @@
         </a>
         <a class="text-sm font-medium text-red-500" href="{{ route('logout') }}">Logout</a>
     </div>
+    
     @yield('content')
 
     @isset($slot)
         {{ $slot }}
     @endisset
-    
 </div>
 @endsection
 
