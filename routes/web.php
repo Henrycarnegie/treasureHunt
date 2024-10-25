@@ -15,7 +15,13 @@ use App\Livewire\Guru\Level3;
 use App\Livewire\Guru\Level4;
 use App\Livewire\Guru\Level5;
 use App\Livewire\Guru\Respondent;
-use App\Livewire\HomePage;
+use App\Livewire\Murid\HomePage;
+use App\Livewire\Murid\Leaderboard;
+use App\Livewire\Murid\Level1 as MuridLevel1;
+use App\Livewire\Murid\Level2 as MuridLevel2;
+use App\Livewire\Murid\Level3 as MuridLevel3;
+use App\Livewire\Murid\Level4 as MuridLevel4;
+use App\Livewire\Murid\Level5 as MuridLevel5;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +45,24 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:murid'])->name('murid.')->prefix('murid')->group(function () {
         Route::get('home', HomePage::class)
         ->name('home');
+
+        Route::get('leaderboard', Leaderboard::class)
+        ->name('leaderboard');
+
+        Route::get('level1', MuridLevel1::class)
+        ->name('level1');
+
+        Route::get('level2', MuridLevel2::class)
+        ->name('level2');
+
+        Route::get('level3', MuridLevel3::class)
+        ->name('level3');
+
+        Route::get('level4', MuridLevel4::class)
+        ->name('level4');
+
+        Route::get('level5', MuridLevel5::class)
+        ->name('level5');
     });
 
     Route::middleware(['role:guru'])->name('guru.')->prefix('guru')->group(function () {
@@ -63,9 +87,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('respondent', Respondent::class)
         ->name('respondent');
-
-        Route::get('logout', Level5::class)
-        ->name('logout');
     });
 
 

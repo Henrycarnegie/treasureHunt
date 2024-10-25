@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Murid;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class HomePage extends Component
 {
     public function render()
     {
-        return view('livewire.home-page')->extends('layouts.app');
+        return view('livewire.murid.home-page')->extends('layouts.app');
     }
 }

@@ -48,7 +48,7 @@
                                     class="text-white">Level 5</x-nav-link>
                             </li>
                             <li>
-                                <x-nav-link href="{{ route('guru.logout') }}" icon="iconLogout" :active="request()->routeIs('guru.logout')"
+                                <x-nav-link href="{{ route('logout') }}" icon="iconLogout" :active="request()->routeIs('logout')"
                                     class="text-red-500">Logout</x-nav-link>
                             </li>
                         </ul>
@@ -120,7 +120,7 @@
                 </x-nav-link>
             </li>
             <li>
-                <x-nav-link href="{{ route('guru.logout') }}" icon="iconLogout" :active="request()->routeIs('guru.logout')"
+                <x-nav-link href="{{ route('logout') }}" icon="iconLogout" :active="request()->routeIs('logout')"
                     class="text-red-500">Logout</x-nav-link>
             </li>
         </ul>
