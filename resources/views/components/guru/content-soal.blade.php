@@ -3,7 +3,7 @@
     <template x-for="(question, index) in questions" :key="index">
         <div class="flex gap-4 items-center">
             <!-- Detail Soal-->
-            <x-view-soal></x-view-soal>
+            <x-guru.view-soal></x-guru.view-soal>
 
             <!-- Tombol Hapus Soal -->
             <button type="button" @click="questions.splice(index, 1)" class="col-end-auto">
@@ -22,5 +22,5 @@
     </button>
 
     <!-- Modal Tambah Soal -->
-    <x-tambah-soal>{{ $slot }}</x-tambah-soal>
+    <x-guru.tambah-soal>{{ $slot }}</x-guru.tambah-soal>
 </div>
