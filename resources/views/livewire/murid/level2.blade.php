@@ -1,3 +1,3 @@
-<div>
-    {{-- Nothing in the world is as soft and yielding as water. --}}
-</div>
+@section('title', 'Level 2')
+
+<x-murid.layout-level infoLevel="2"></x-murid.layout-level>
