@@ -1,3 +1,3 @@
-<div>
-    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-</div>
+@section('title', 'Level 5')
+
+<x-murid.layout-level infoLevel="5"></x-murid.layout-level>

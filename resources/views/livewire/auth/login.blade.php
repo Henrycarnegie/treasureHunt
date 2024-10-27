@@ -1,9 +1,8 @@
 @section('title', 'Login')
 
-
 <div class="min-h-screen flex items-center justify-center w-full h-full bg-no-repeat bg-cover bg-gradient-to-r from-slate-700 to-zinc-800">
     <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg px-8 py-8 min-w-96">
-        <h1 class="text-2xl font-bold text-center mb-6 dark:text-gray-200">Login akun tim kamu !</h1>
+        <h1 class="font-bangers text-2xl font-bold text-center mb-6 dark:text-gray-200">Login akun tim kamu !</h1>
         <form wire:submit.prevent="authenticate">
             <div class="mb-4">
                 <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Username</label>

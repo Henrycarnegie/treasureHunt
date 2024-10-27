@@ -1,3 +1,3 @@
-<div>
-    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-</div>
+@section('title', 'Level 4')
+
+<x-murid.layout-level infoLevel="4"></x-murid.layout-level>

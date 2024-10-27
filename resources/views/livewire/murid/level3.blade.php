@@ -1,3 +1,3 @@
-<div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
-</div>
+@section('title', 'Level 3')
+
+<x-murid.layout-level infoLevel="3"></x-murid.layout-level>

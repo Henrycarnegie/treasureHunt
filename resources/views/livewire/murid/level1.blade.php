@@ -1,3 +1,3 @@
-<div>
-    {{-- The whole world belongs to you. --}}
-</div>
+@section('title', 'Level 1')
+
+<x-murid.layout-level infoLevel="1"></x-murid.layout-level>
