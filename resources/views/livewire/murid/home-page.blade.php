@@ -1,6 +1,6 @@
 @section('title', 'Home Page')
 
-<div class="flex flex-col items-center w-full lg:h-[300vh] min-h-screen overflow-hidden">
+<div class="flex flex-col items-center w-full lg:h-[190dvh] min-h-screen overflow-hidden"> 
     <div
         class="flex items-center justify-between px-2 py-2 lg:px-6 w-full bg-no-repeat bg-cover bg-gradient-to-r from-slate-700 to-zinc-800 sticky top-0 z-10">
         <img src="{{ asset('img/logo.svg') }}" alt="logo" class="lg:max-w-20 max-w-12">
@@ -42,4 +42,6 @@
                 class="absolute w-12 md:w-24 lg:w-40 top-[68%] right-[15%] md:top-[75%] md:right-[14%] lg:top-[72%] lg:right-[14%] xl:top-[75%] xl:right-[18%]">
         </a>
     </div>
+    <audio autoplay class="flex" src="{{ asset('audio/audio.mp3') }}"></audio>
+   
 </div>
