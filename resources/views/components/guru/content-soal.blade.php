@@ -1,4 +1,4 @@
-@props(['responseType' => '', 'pekerjaan'=>'', 'type_question'=>''])
+@props(['responseType', 'pekerjaan', 'type_question'])
 
 <div x-data="{ questions: ['1'], tambahSoalOpen: false }" x-cloak class="grid items-center gap-2 mt-2" @click.stop>
     <!-- Loop untuk menampilkan field-soal -->
