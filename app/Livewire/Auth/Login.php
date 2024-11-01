@@ -37,7 +37,7 @@ class Login extends Component
             return redirect()->intended(route('guru.dashboard'));
         }
 
-        if ($user->hasRole('murid')) {
+        if ($user->hasRole('polisi') || $user->hasRole('detektif') || $user->hasRole('nelayan') || $user->hasRole('petani')) {
             return redirect()->intended(route('murid.home'));
         }
     }

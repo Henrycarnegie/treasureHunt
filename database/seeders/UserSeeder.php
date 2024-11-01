@@ -22,10 +22,31 @@ class UserSeeder extends Seeder
         $guru->assignRole('guru');
 
         $murid = User::create([
-                'name' => 'murid',
-                'username' => 'murid123',
+                'name' => 'polisi',
+                'username' => 'polisi123',
                 'password' => Hash::make('password')
         ]);
-        $murid->assignRole('murid');
+        $murid->assignRole('polisi');
+
+        $murid = User::create([
+                'name' => 'detektif',
+                'username' => 'detektif123',
+                'password' => Hash::make('password')
+        ]);
+        $murid->assignRole('detektif');
+
+        $murid = User::create([
+                'name' => 'nelayan',
+                'username' => 'nelayan123',
+                'password' => Hash::make('password')
+        ]);
+        $murid->assignRole('nelayan');
+
+        $murid = User::create([
+                'name' => 'petani',
+                'username' => 'petani123',
+                'password' => Hash::make('password')
+        ]);
+        $murid->assignRole('petani');
     }
 }

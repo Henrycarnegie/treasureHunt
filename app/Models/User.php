@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function murid()
+    {
+        return $this->hasOne(Murid::class, 'users_id');
+    }
 }
