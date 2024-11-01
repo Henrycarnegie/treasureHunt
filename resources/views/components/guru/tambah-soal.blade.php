@@ -1,4 +1,4 @@
-@props(['responseType' => '', 'pekerjaan'=>'', 'type_question'=>''])
+@props(['responseType' => '', 'pekerjaan', 'type_question'=>''])
 <div
     x-show="tambahSoalOpen"
     x-transition.opacity x-cloak

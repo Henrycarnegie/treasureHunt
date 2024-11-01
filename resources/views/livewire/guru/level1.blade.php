@@ -18,6 +18,9 @@
             <x-guru.modal-soal  infoPekerjaan="Petani">
                 <x-guru.content-soal responseType="pilgan" pekerjaan="petani" type_question="main_question"></x-guru.content-soal>
             </x-guru.modal-soal>
+            <x-guru.modal-soal  infoPekerjaan="Alternatif">
+                <x-guru.content-soal responseType="pilgan" pekerjaan=null type_question="secondary_question"></x-guru.content-soal>
+            </x-guru.modal-soal>
         </div>
     </div>
 </div>
