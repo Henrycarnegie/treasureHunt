@@ -1,5 +1,5 @@
 @php
-    $defaultClasses = 'flex flex-col border-2 border-gray-100 p-4 rounded-md cursor-pointer';
+    $defaultClasses = 'flex flex-col border-2 border-gray-100 p-3 md:p-4 rounded-md cursor-pointer';
     $activeClasses = 'bg-gray-800 text-white';
     $hoverClasses = 'hover:bg-gray-800 hover:text-white focus:bg-gray-800';
 @endphp
