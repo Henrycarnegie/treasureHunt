@@ -15,7 +15,7 @@
                 </button>
                 <aside x-show="isOpen" @click.outside="isOpen=false"
                     class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform bg-white border-r border-gray-200  dark:bg-gray-800 dark:border-gray-700"
-                    aria-label="Sidebar">
+                    x-cloak>
                     <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                         <ul class="space-y-2 font-medium">
                             <li>

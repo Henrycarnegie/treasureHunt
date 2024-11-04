@@ -43,6 +43,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::middleware(['role:polisi,nelayan,detektif,petani'])->name('murid.')->prefix('murid')->group(function () {
+
         Route::get('home', HomePage::class)
         ->name('home');
 

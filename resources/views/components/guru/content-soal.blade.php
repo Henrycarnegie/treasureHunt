@@ -1,4 +1,5 @@
-@props(['responseType', 'pekerjaan', 'type_question'])
+@props(['responseType' => '', 'pekerjaan', 'type_question' => '', 'fullOption' => false])
+
 
 <div x-data="{ questions: ['1'], tambahSoalOpen: false }" x-cloak class="grid items-center gap-2 mt-2" @click.stop>
     <!-- Loop untuk menampilkan field-soal -->
@@ -24,5 +25,5 @@
     </button>
 
     <!-- Modal Tambah Soal -->
-    <x-guru.tambah-soal responseType="{{ $responseType }}" pekerjaan="{{ $pekerjaan }}" type_question="{{ $type_question }}">{{ $slot }}</x-guru.tambah-soal>
+    <x-guru.tambah-soal responseType="{{ $responseType }}" pekerjaan="{{ $pekerjaan }}" type_question="{{ $type_question }}" :fullOption="$fullOption"></x-guru.tambah-soal>
 </div>
