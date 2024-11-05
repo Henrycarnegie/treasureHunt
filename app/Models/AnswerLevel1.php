@@ -26,6 +26,6 @@ class AnswerLevel1 extends Model
 
     public function level1()
     {
-        return $this->belongsTo(Level1::class, 'level_1_id');
+        return $this->belongsTo(SoalLevel1::class, 'level_1_id');
     }
 }

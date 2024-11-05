@@ -15,7 +15,7 @@ class RedirectIfAuthenticated
             // Redirect berdasarkan role
             if ($user->hasRole('guru')) {
                 return redirect('/guru');
-            } elseif ($user->hasRole('murid')) {
+            } elseif ($user->hasRole('polisi') || $user->hasRole('detektif') || $user->hasRole('nelayan') || $user->hasRole('petani')) {
                 return redirect('/murid/home');
             }
         }

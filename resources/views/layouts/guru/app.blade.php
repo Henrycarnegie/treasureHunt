@@ -30,11 +30,14 @@
 
     <body class="font-sans antialiase">
         <x-navigation></x-navigation>
-        
+
         @yield('content')
 
         @isset($slot)
             {{ $slot }}
         @endisset
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <x-livewire-alert::scripts />
     </body>
 </html>

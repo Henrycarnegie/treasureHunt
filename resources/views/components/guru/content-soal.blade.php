@@ -1,19 +1,23 @@
-@props(['responseType' => '', 'pekerjaan', 'type_question' => '', 'fullOption' => false])
+@props(['responseType', 'pekerjaan', 'type_question', 'fullOption' => false, 'data' => collect()])
 
-
-<div x-data="{ questions: ['1'], tambahSoalOpen: false }" x-cloak class="grid items-center gap-2 mt-2" @click.stop>
-    <!-- Loop untuk menampilkan field-soal -->
-    <template x-for="(question, index) in questions" :key="index">
-        <div class="flex gap-4 items-center">
-            <!-- Detail Soal-->
-            <x-guru.view-soal></x-guru.view-soal>
+<div x-data="{ tambahSoalOpen: @entangle('tambahSoalOpen') }" x-cloak class="grid items-center gap-2 mt-2" @click.stop>
+    <!-- Pengecekan data kosong atau bukan tipe yang bisa di-loop -->
+    @if($data->where('role_name', $pekerjaan)->isEmpty())
+        <div class="text-gray-500">Belum ada soal yang tersedia.</div>
+    @else
+    @foreach ($data->where('role_name', $pekerjaan) as $dataItem)
+        <div class="flex gap-4 items-center" x-data="{ viewSoalOpen: false }" @click.outside="viewSoalOpen = false">
+            <!-- Detail Soal -->
+            <x-guru.view-soal :question="$dataItem" :iteration="$loop->iteration"></x-guru.view-soal>
 
             <!-- Tombol Hapus Soal -->
-            <button type="button" class="col-end-auto">
+            <button wire:click="confirmDelete('{{ $dataItem->id }}')" type="button" class="col-end-auto">
                 <x-icon icon="iconDelete"></x-icon>
             </button>
         </div>
-    </template>
+    @endforeach
+
+    @endif
 
     <!-- Tombol Tambah Soal -->
     <button

@@ -13,15 +13,7 @@ return new class extends Migration
     {
         Schema::create('level1', function (Blueprint $table) {
             $table->id();
-            $table->string('role_name');
-            $table->string('type_question');
-            $table->string('question_text');
-            $table->string('question_image')->nullable(true);
-            $table->string('answer_a');
-            $table->string('answer_b');
-            $table->string('answer_c');
-            $table->string('answer_d');
-            $table->string('corret_answer');
+            $table->integer('waktu_level1');
             $table->timestamps();
         });
     }

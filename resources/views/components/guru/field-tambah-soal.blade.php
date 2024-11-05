@@ -91,12 +91,10 @@
         <label class="block mb-2 text-sm text-slate-600 after:content-['*'] after:ml-0.5 after:text-red-500">Pilih opsi
             jawaban yang benar</label>
         <select
-            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+            wire:model="correct_answer" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
             <option value="" selected>Pilih opsi jawaban yang tepat</option>
             <option value="A" class="">Option A</option>
             <option value="B" class="">Option B</option>
-            <option value="C" class="">Option C</option>
-            <option value="D" class="">Option D</option>
         </select>
     </div>
 @elseif ($responseType === 'pilganUploadFoto' || $responseType === 'uploadFoto')

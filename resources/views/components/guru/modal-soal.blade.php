@@ -1,4 +1,4 @@
-@props([ 
+@props([
 'active', 'infoPekerjaan'])
 
 @php
@@ -6,10 +6,10 @@
 @endphp
 
 <div x-data="{ isOpen: false }" class="col-span-2">
-    <div 
-        {{ $attributes->merge(['class' => $defaultClasses]) }} 
-        :class="isOpen ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white focus:bg-gray-800'" 
-        @click="isOpen = !isOpen" 
+    <div
+        {{ $attributes->merge(['class' => $defaultClasses]) }}
+        :class="isOpen ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 hover:text-white focus:bg-gray-800'"
+        @click="isOpen = !isOpen"
         @click.outside="isOpen = false"
     >
         <!-- Header Level -->

@@ -3,22 +3,56 @@
 namespace App\Livewire\Guru;
 
 use App\Models\Level1 as ModelsLevel1;
+use App\Models\SoalLevel1;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Level1 extends Component
 {
     use WithFileUploads;
+    use LivewireAlert;
 
-    public $role_name, $type_question, $question_text, $question_image, $answer_a, $answer_b, $answer_c, $answer_d, $corret_answer = 'd';
+    public $waktu_level1, $data, $tambahSoalOpen = false, $id;
+    public $role_name, $type_question, $question_text, $question_image, $answer_a, $answer_b, $correct_answer, $level_time;
+    protected $listeners = ['deleteConfirmed' => 'handleConfirm'];
 
     public function setValue($role_name, $type_question){
         $this->role_name = $role_name;
         $this->type_question = $type_question;
     }
 
-    public function simpanSoal()
+    public function simpanWaktuLevel()
     {
+        $rules = [
+            'level_time' => 'required',
+        ];
+
+        $this->validate($rules);
+
+        $waktu_level1 = ModelsLevel1::first();
+
+        if (isset($waktu_level1)) {
+            $waktu_level1->update([
+                'waktu_level1' => $this->level_time,
+            ]);
+        }else{
+            ModelsLevel1::create([
+                'waktu_level1' => $this->level_time,
+            ]);
+        }
+
+
+        $this->reset('level_time');
+
+        $this->alert('success', 'Waktu Level Berhasil Diubah', [
+            'position' => 'center',
+            'toast' => false,
+        ]);
+    }
+
+    public function simpanSoal(){
         $rules = [
             'role_name' => 'required',
             'type_question' => 'required',
@@ -26,9 +60,7 @@ class Level1 extends Component
             'question_image' => 'nullable|file|image|max:1024',
             'answer_a' => 'required|min:3|max:255',
             'answer_b' => 'required|min:3|max:255',
-            'answer_c' => 'required|min:3|max:255',
-            'answer_d' => 'required|min:3|max:255',
-            'corret_answer' => 'required',
+            'correct_answer' => 'required',
         ];
 
         $customMessages = [
@@ -45,41 +77,35 @@ class Level1 extends Component
             'answer_b.required' => 'Jawaban B harus diisi.',
             'answer_b.min' => 'Jawaban B harus minimal 3 karakter.',
             'answer_b.max' => 'Jawaban B tidak boleh lebih dari 255 karakter.',
-            'answer_c.required' => 'Jawaban C harus diisi.',
-            'answer_c.min' => 'Jawaban C harus minimal 3 karakter.',
-            'answer_c.max' => 'Jawaban C tidak boleh lebih dari 255 karakter.',
-            'answer_d.required' => 'Jawaban D harus diisi.',
-            'answer_d.min' => 'Jawaban D harus minimal 3 karakter.',
-            'answer_d.max' => 'Jawaban D tidak boleh lebih dari 255 karakter.',
-            'corret_answer.required' => 'Jawaban benar harus diisi.',
+            'correct_answer.required' => 'Jawaban benar harus diisi.',
         ];
 
-        // dd($this->type_question, $this->role_name);
-
-        // Cek dan validasi input
+        // Validasi input
         $this->validate($rules, $customMessages);
 
-        // Mengunggah gambar jika ada
+        // Inisialisasi variabel untuk nama file
+        $customFileName = null;
+
         if ($this->question_image) {
+            // Menyimpan gambar dan mendapatkan nama file
             $customFileName = 'soal1_' . time() . '.' . $this->question_image->getClientOriginalExtension();
             $this->question_image->storeAs('soal_level1', $customFileName, 'public');
-            $this->question_image = $customFileName;
         }
 
-        // Menyimpan soal ke database
-        ModelsLevel1::create([
+        $correct_answer = $this->correct_answer === 'A' ? $this->answer_a : $this->answer_b;
+
+        // Menyimpan data soal ke database
+        SoalLevel1::create([
             'role_name' => $this->role_name,
             'type_question' => $this->type_question,
             'question_text' => $this->question_text,
-            'question_image' => $this->question_image,
+            'question_image' => $customFileName, // Pastikan ini null jika tidak ada gambar
             'answer_a' => $this->answer_a,
             'answer_b' => $this->answer_b,
-            'answer_c' => $this->answer_c,
-            'answer_d' => $this->answer_d,
-            'corret_answer' => $this->corret_answer,
+            'correct_answer' => $correct_answer,
         ]);
 
-        // Reset variabel
+        // Reset semua properti untuk mengosongkan data dan menghapus file temporary
         $this->reset([
             'role_name',
             'type_question',
@@ -87,14 +113,65 @@ class Level1 extends Component
             'question_image',
             'answer_a',
             'answer_b',
-            'answer_c',
-            'answer_d',
-            'corret_answer',
+            'correct_answer',
         ]);
+
+        $this->clean_tmp();
+    }
+
+    public function clean_tmp(){
+        $tmp = Storage::files('livewire-tmp');
+        foreach($tmp as $t){
+            Storage::delete($t);
+        }
+
+        $this->tambahSoalOpen = false;
+
+        $this->alert('success', 'Berhasil Menambahkan soal');
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->id = $id;
+        $this->alert('warning', 'Apakah Anda Yakin Ingin Menghapus Soal Ini?', [
+            'position' => 'center',
+            'toast' => false,
+            'showConfirmButton' => true,
+            'confirmButtonText' => 'Ya, Hapus',
+            'showCancelButton' => true,
+            'cancelButtonText' => 'Batal',
+            'onConfirmed' => 'deleteConfirmed',
+        ]);
+    }
+
+    public function handleConfirm()
+    {
+        if ($this->id) {
+            $this->deletePermission($this->id);
+        }
+    }
+
+    public function deletePermission($id)
+    {
+        $soal = SoalLevel1::find($id);
+
+        if ($soal) {
+            $filePath = public_path('storage/soal_level1/' . $soal->question_image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $soal->delete();
+            $this->alert('success', 'Berhasil Menghapus Soal.');
+        } else {
+            $this->alert('error', 'Soal Tidak Ditemukan.');
+        }
     }
 
     public function render()
     {
+        $this->waktu_level1 = ModelsLevel1::value('waktu_level1');
+        $this->data = SoalLevel1::select('id', 'role_name', 'type_question', 'question_text', 'question_image', 'correct_answer')->get();
         return view('livewire.guru.level1')->extends('layouts.guru.app');
     }
+
 }
