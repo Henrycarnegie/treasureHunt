@@ -27,7 +27,7 @@ class Level1 extends Component
             'completed_at' => now()
         ]);
 
-        $this->alert('success', 'Berhasil Menambahkan soal');
+        return redirect()->route('murid.home');
 
         // Uncomment jika ingin redirect setelah selesai
         // return redirect()->route('next.level');
