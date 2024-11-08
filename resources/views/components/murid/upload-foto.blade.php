@@ -13,6 +13,6 @@
             </p>
             <p class="text-xs text-gray-500 dark:text-gray-400">PNG, JPG or PDF</p>
         </div>
-        <input id="dropzone-file" type="file" class="hidden" />
+        <input id="dropzone-file" type="file" class="hidden" wire:model="answer_image"/>
     </label>
 </div>

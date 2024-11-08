@@ -3,14 +3,15 @@
 namespace App\Livewire\Murid;
 
 use App\Models\Level1 as ModelsLevel1;
+use App\Models\SoalLevel1;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class Level1 extends Component
 {
     use LivewireAlert;
-    public $countdown;
-    public $display = '00:00';
+    public $countdown, $display = '00:00';
+    public $data;
 
     public function mount()
     {
@@ -22,10 +23,10 @@ class Level1 extends Component
     {
         $this->display = '00:00';
 
-        ModelsLevel1::first()->update([
-            'status' => 'completed',
-            'completed_at' => now()
-        ]);
+        // ModelsLevel1::first()->update([
+        //     'status' => 'completed',
+        //     'completed_at' => now()
+        // ]);
 
         return redirect()->route('murid.home');
 
@@ -35,6 +36,7 @@ class Level1 extends Component
 
     public function render()
     {
+        $this->data = SoalLevel1::all();
         return view('livewire.murid.level1')->extends('layouts.app');
     }
 }

@@ -20,7 +20,7 @@
             <x-guru.modal-soal infoPekerjaan="Detektif">
                 <x-guru.content-soal
                     responseType="pilgan"
-                    pekerjaan="Detektif"
+                    pekerjaan="detektif"
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"
@@ -30,7 +30,7 @@
             <x-guru.modal-soal infoPekerjaan="Nelayan">
                 <x-guru.content-soal
                     responseType="pilgan"
-                    pekerjaan="Nelayan"
+                    pekerjaan="nelayan"
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"
@@ -40,7 +40,7 @@
             <x-guru.modal-soal infoPekerjaan="Petani">
                 <x-guru.content-soal
                     responseType="pilgan"
-                    pekerjaan="Petani"
+                    pekerjaan="petani"
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"

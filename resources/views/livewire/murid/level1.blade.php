@@ -1,6 +1,6 @@
 @section('title', 'Level 1')
 
-<x-murid.layout-level infoLevel="1" :levelTimeLeft="$countdown" :display="$display"></x-murid.layout-level>
+<x-murid.layout-level infoLevel="1" :data="$data" :levelTimeLeft="$countdown" :display="$display"></x-murid.layout-level>
 
 <script>
     function countdown(levelTimeLeft) {
