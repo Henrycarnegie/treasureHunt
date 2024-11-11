@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,32 +22,68 @@ class UserSeeder extends Seeder
         ]);
         $guru->assignRole('guru');
 
-        $murid = User::create([
+        $userMurid = User::create([
                 'name' => 'polisi',
                 'username' => 'polisi123',
                 'password' => Hash::make('password')
         ]);
-        $murid->assignRole('polisi');
+        $userMurid->assignRole('polisi');
 
-        $murid = User::create([
+        Murid::create([
+            'users_id' => $userMurid->id,
+            'score_level_1' => 0,
+            'score_level_2' => 0,
+            'score_level_3' => 0,
+            'score_level_4' => 0,
+            'score_level_5' => 0
+        ]);
+
+        $userMurid = User::create([
                 'name' => 'detektif',
                 'username' => 'detektif123',
                 'password' => Hash::make('password')
         ]);
-        $murid->assignRole('detektif');
+        $userMurid->assignRole('detektif');
 
-        $murid = User::create([
+        $murid = Murid::create([
+            'users_id' => $userMurid->id,
+            'score_level_1' => 0,
+            'score_level_2' => 0,
+            'score_level_3' => 0,
+            'score_level_4' => 0,
+            'score_level_5' => 0
+        ]);
+
+        $userMurid = User::create([
                 'name' => 'nelayan',
                 'username' => 'nelayan123',
                 'password' => Hash::make('password')
         ]);
-        $murid->assignRole('nelayan');
+        $userMurid->assignRole('nelayan');
 
-        $murid = User::create([
+        $murid = Murid::create([
+            'users_id' => $userMurid->id,
+            'score_level_1' => 0,
+            'score_level_2' => 0,
+            'score_level_3' => 0,
+            'score_level_4' => 0,
+            'score_level_5' => 0
+        ]);
+
+        $userMurid = User::create([
                 'name' => 'petani',
                 'username' => 'petani123',
                 'password' => Hash::make('password')
         ]);
-        $murid->assignRole('petani');
+        $userMurid->assignRole('petani');
+
+        $murid = Murid::create([
+            'users_id' => $userMurid->id,
+            'score_level_1' => 0,
+            'score_level_2' => 0,
+            'score_level_3' => 0,
+            'score_level_4' => 0,
+            'score_level_5' => 0
+        ]);
     }
 }

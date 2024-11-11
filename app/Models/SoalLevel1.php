@@ -27,6 +27,6 @@ class SoalLevel1 extends Model
 
     public function answerLevel1()
     {
-        return $this->hasMany(AnswerLevel1::class, 'level_1_id');
+        return $this->hasMany(AnswerLevel1::class, 'soal_level1_id');
     }
 }

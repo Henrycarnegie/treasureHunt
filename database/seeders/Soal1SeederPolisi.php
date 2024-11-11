@@ -17,7 +17,7 @@ class Soal1SeederPolisi extends Seeder
     {
         // Create the Level1 record with timestamps
         Level1::create([
-            'waktu_level1' => 15,
+            'waktu_level1' => 1,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -27,25 +27,91 @@ class Soal1SeederPolisi extends Seeder
             [
                 'role_name' => 'polisi',
                 'type_question' => 'math_question',
-                'question_text' => 'Berapakah hasil dari 5 + 3 ?',
+                'question_text' => 'Berapakah hasil dari 1 + 2 ?',
                 'question_image' => null,
-                'answer_a' => '7',
-                'answer_b' => '8',
-                'correct_answer' => '8',
+                'answer_a' => '3',
+                'answer_b' => '4',
+                'correct_answer' => '3',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
             [
                 'role_name' => 'polisi',
                 'type_question' => 'math_question',
-                'question_text' => 'Berapakah hasil dari 9 - 4 ?',
+                'question_text' => 'Berapakah hasil dari 2 - 3 ?',
                 'question_image' => null,
-                'answer_a' => '5',
-                'answer_b' => '6',
-                'correct_answer' => '5',
+                'answer_a' => '-2',
+                'answer_b' => '-1',
+                'correct_answer' => '-1',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
-            ]
+            ],
+            [
+                'role_name' => 'detektif',
+                'type_question' => 'math_question',
+                'question_text' => 'Berapakah hasil dari 4 + 5 ?',
+                'question_image' => null,
+                'answer_a' => '9',
+                'answer_b' => '10',
+                'correct_answer' => '9',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'role_name' => 'detektif',
+                'type_question' => 'math_question',
+                'question_text' => 'Berapakah hasil dari 6 - 7 ?',
+                'question_image' => null,
+                'answer_a' => '2',
+                'answer_b' => '-1',
+                'correct_answer' => '-1',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'role_name' => 'nelayan',
+                'type_question' => 'math_question',
+                'question_text' => 'Berapakah hasil dari 8 + 9 ?',
+                'question_image' => null,
+                'answer_a' => '17',
+                'answer_b' => '18',
+                'correct_answer' => '17',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'role_name' => 'nelayan',
+                'type_question' => 'math_question',
+                'question_text' => 'Berapakah hasil dari 10 - 11 ?',
+                'question_image' => null,
+                'answer_a' => '3',
+                'answer_b' => '-1',
+                'correct_answer' => '-1',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'role_name' => 'petani',
+                'type_question' => 'math_question',
+                'question_text' => 'Berapakah hasil dari 12 + 13 ?',
+                'question_image' => null,
+                'answer_a' => '25',
+                'answer_b' => '26',
+                'correct_answer' => '25',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'role_name' => 'petani',
+                'type_question' => 'math_question',
+                'question_text' => 'Berapakah hasil dari 14 - 15 ?',
+                'question_image' => null,
+                'answer_a' => '4',
+                'answer_b' => '-1',
+                'correct_answer' => '-1',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
         ]);
     }
 }

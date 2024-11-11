@@ -1,7 +1,9 @@
 @props([
     'question' => 'Pertanyaan tidak tersedia',
     'answer' => 'Jawaban tidak tersedia',
+    'image_reason'  => 'gambar tidak tersedia',
     'responseType',
+    'id'
 ])
 
 @if ($responseType === 'pilgan')
@@ -20,14 +22,17 @@
     </span>
     <div class="md:flex gap-4">
         <span class="text-sm">Lembar alasan = </span>
-        <img src="{{ asset('img/dummyResponse.png') }}" alt="jawaban siswa" class="w-40">
+        <img src="{{ asset('storage/answer_soal_level1/' . $image_reason) }}" alt="jawaban siswa" class="w-40">
     </div>
     <div class="flex flex-col gap-2 ">
         <span class="text-sm">Masukan nilai siswa</span>
-        <form action="" class="flex gap-2">
-            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="w-full block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:text-sm" placeholder="nilai 1 - 100">
+        <form wire:submit.prevent="simpanNilaiSoal1({{ $id }})" class="flex gap-2">
+            <input type="number" name="point_reason" wire:model="point_reason" class="w-full block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:text-sm" placeholder="nilai 1 - 100">
             <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
         </form>
+        @error('point_reason')
+            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+        @enderror
     </div>
 @elseif ($responseType === 'upload')
     <div class="grid lg:grid-cols-2 gap-4">
