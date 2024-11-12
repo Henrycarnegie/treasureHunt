@@ -17,7 +17,7 @@ x-data="{
               }
           }
       }">
-    <x-murid.layout-level infoLevel="1" :data="$data" :levelTimeLeft="$countdown" :display="$display" :selectedAnswer="$selectedAnswer"></x-murid.layout-level>
+    <x-murid.layout-level x-data="{isModalWarning: true}" infoLevel="1" :data="$data" :levelTimeLeft="$countdown" :display="$display" :selectedAnswer="$selectedAnswer"></x-murid.layout-level>
 </form>
 
 
