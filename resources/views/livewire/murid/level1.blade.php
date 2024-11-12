@@ -17,72 +17,16 @@ x-data="{
               }
           }
       }">
-    <x-murid.layout-level x-data="{isModalWarning: true}" infoLevel="1" :data="$data" :levelTimeLeft="$countdown" :display="$display" :selectedAnswer="$selectedAnswer"></x-murid.layout-level>
+    <x-murid.layout-level infoLevel="1" :data="$data" :endTime="$endTime" :startTime="$startTime" :levelTimeLeft="$countdown" :display="$display" :selectedAnswer="$selectedAnswer"></x-murid.layout-level>
 </form>
 
-
 <script>
-    function countdown(levelTimeLeft) {
-    return {
-        display: '00:00',
-        endTime: parseInt(localStorage.getItem('countdownEndTime')) || Date.now() + Math.max(0, parseInt(levelTimeLeft) * 60 * 1000),
-        intervalId: null,
-        isFinished: false,
+    document.addEventListener('DOMContentLoaded', function () {
+        const startButton = document.getElementById('mulai');
+        const timer = countdown(5); // Ganti 5 dengan durasi countdown dalam menit
 
-        init() {
-            // Set end time to local storage jika belum diset
-            if (!localStorage.getItem('countdownEndTime')) {
-                localStorage.setItem('countdownEndTime', this.endTime);
-            }
-            this.startCountdown();
-        },
-
-        startCountdown() {
-            this.updateDisplay();
-            this.intervalId = setInterval(() => {
-                const now = Date.now();
-                const remaining = Math.max(0, this.endTime - now);
-
-                if (remaining > 0) {
-                    this.updateDisplay(remaining);
-                } else {
-                    this.finishCountdown();
-                }
-            }, 100);
-        },
-
-        finishCountdown() {
-            if (!this.isFinished) {
-                this.isFinished = true;
-                clearInterval(this.intervalId);
-                this.display = '00:00';
-                localStorage.removeItem('countdownEndTime'); // Hapus end time dari Local Storage
-                this.$wire.call('countdownFinished');
-                const submitButton = document.getElementById('submit-button');
-                if (submitButton) {
-                    submitButton.click();
-                }
-            }
-        },
-
-        updateDisplay(remaining = null) {
-            if (this.isFinished) return;
-
-            if (remaining === null) {
-                remaining = Math.max(0, this.endTime - Date.now());
-            }
-            const totalSeconds = Math.ceil(remaining / 1000);
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            this.display = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
-    }
-}
-document.addEventListener('DOMContentLoaded', function () {
-    Livewire.on('submitForm', () => {
-        // Clear Local Storage
-        localStorage.removeItem('countdownEndTime');
-        console.log('Local Storage cleared after form submission');
+        startButton.addEventListener('click', () => {
+            timer.init(); // Mulai countdown saat tombol "Mulai" diklik
+        });
     });
-});
 </script>

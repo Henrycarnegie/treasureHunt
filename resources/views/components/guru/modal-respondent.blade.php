@@ -20,7 +20,7 @@
             <x-guru.respondent-level infoLevel="1">
                 @foreach ($data->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response responseType="pilganWithUpload" question="{{ $item->soal_question_text }}" answer="{{ $item->answer }}" image_reason="{{ $item->image_reason }}" id="{{ $item->id }}"></x-guru.response>
+                        <x-guru.response :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soal_question_text" :answer="$item->answer" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>

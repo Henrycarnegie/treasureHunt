@@ -1,6 +1,6 @@
 @section('title', 'Home Page')
 
-<div class="flex flex-col items-center w-full lg:h-[190dvh] xl:h-[300dvh] min-h-screen overflow-hidden"> 
+<div class="flex flex-col items-center w-full lg:h-[190dvh] xl:h-[300dvh] min-h-screen overflow-hidden">
     <div
         class="flex items-center justify-between px-2 py-2 lg:px-6 w-full bg-no-repeat bg-cover bg-gradient-to-r from-slate-700 to-zinc-800 sticky top-0 z-10">
         <img src="{{ asset('img/logo.svg') }}" alt="logo" class="lg:max-w-20 max-w-12">
@@ -12,7 +12,7 @@
     </div>
     <div
         class="relative bg-game-map bg-top bg-no-repeat bg-cover md:bg-cover lg:bg-cover w-screen min-h-[60dvh] max-h-[60dvh] md:min-h-[130dvh] lg:min-h-[180dvh] xl:min-h-[300dvh] overflow-hidden">
-        <a href="{{ route('murid.level1') }}">
+        <a wire:click="cekAksesLevel1">
             {{-- Level 1 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-1"
                 class="absolute w-12 md:w-24 lg:w-40 top-[17%] right-[29%] md:top-[14%] md:right-[28%] lg:top-[13%] lg:right-[27%] xl:top-[14%] xl:right-[30%]">
@@ -43,5 +43,5 @@
         </a>
     </div>
     <audio autoplay src="{{ asset('audio/audio.mp3') }}"></audio>
-   
+
 </div>
