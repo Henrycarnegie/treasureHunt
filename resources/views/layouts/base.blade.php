@@ -23,6 +23,7 @@
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
     @livewireScripts
 
     <!-- CSRF Token -->
@@ -31,8 +32,7 @@
 
 <body class="font-sans antialiase">
     @yield('body')
-    
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <x-livewire-alert::scripts />
 </body>
