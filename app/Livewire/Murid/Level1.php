@@ -3,6 +3,7 @@
 namespace App\Livewire\Murid;
 
 use App\Models\AnswerLevel1;
+use App\Models\FirstAcccessLevel1;
 use App\Models\Level1 as ModelsLevel1;
 use App\Models\Murid;
 use App\Models\SoalLevel1;
@@ -17,16 +18,34 @@ class Level1 extends Component
     use WithFileUploads;
     use LivewireAlert;
 
-    public $countdown, $display = '00:00';
+    public $countdown, $startTime, $endTime, $display = '00:00', $showModal = true;
     public $data, $selectedAnswer = [], $answer_image = [], $soallevel1_id = [];
 
     public function mount()
     {
         $level1 = ModelsLevel1::first();
+        $data = FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first();
+        if( null !== $data){
+            $this->startTime = $data->created_at;
+            $this->endTime = $data->end_time;
+            $this->showModal = false;
+        }
+
         $this->countdown = $level1 ? $level1->waktu_level1 : 0;
     }
 
-    public function simpanJawaban(){
+    public function startGame($endTime)
+    {
+        if( null == FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first()){
+            FirstAcccessLevel1::create([
+                'role_name' => Auth::user()->getRoleNames()->first(),
+                'end_time' => $endTime
+            ]);
+        }
+    }
+
+    public function simpanJawaban()
+    {
         $userId = Auth::id();
         $roleName = Auth::user()->getRoleNames()->first();
         $murid = Murid::where('users_id', $userId)->pluck('id')->first();
@@ -40,8 +59,8 @@ class Level1 extends Component
 
                 if (!isset($this->answer_image[$key])) {
                     $this->answer_image[$key] = null;
-                }else{
-                    $customFileName = 'answer_soal1_'. $roleName . '_' . $key. '_' . time() . '.' . $this->answer_image[$key]->getClientOriginalExtension();
+                } else {
+                    $customFileName = 'answer_soal1_' . $roleName . '_' . $key . '_' . time() . '.' . $this->answer_image[$key]->getClientOriginalExtension();
                     $this->answer_image[$key]->storeAs('answer_soal_level1', $customFileName, 'public');
                 }
 
@@ -73,7 +92,6 @@ class Level1 extends Component
             'selectedAnswer',
             'answer_image',
         ]);
-        $this->dispatch('submitForm');
         return redirect()->route('murid.home');
     }
 

@@ -10,27 +10,33 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Respondent extends Component
 {
     use LivewireAlert;
-    public $data, $soal, $point_reason;
+    public $data, $soal, $point_reason = [];
 
-    public function simpanNilaiSoal1($id)
+    public function simpanNilaiSoal1($id, $number)
     {
         $rules = [
-            'point_reason' => 'required|numeric|min:0|max:100',
+            'point_reason.*' => 'required|numeric|min:0|max:100',
         ];
 
         $messages = [
-            'point_reason.required' => 'Nilai harus diisi.',
-            'point_reason.numeric' => 'Nilai harus berupa angka.',
-            'point_reason.min' => 'Nilai minimal 0.',
-            'point_reason.max' => 'Nilai maksimal 100.',
+            'point_reason.*.required' => 'Nilai harus diisi.',
+            'point_reason.*.numeric' => 'Nilai harus berupa angka.',
+            'point_reason.*.min' => 'Nilai minimal 0.',
+            'point_reason.*.max' => 'Nilai maksimal 100.',
         ];
+
+        // Validasi input
         $this->validate($rules, $messages);
 
         $answer = AnswerLevel1::find($id);
-        $answer->point_reason = $this->point_reason;
+        $answer->point_reason = $this->point_reason[$number];
         $answer->save();
+
+        $this->reset('point_reason');
+
         $this->alert('success', 'Berhasil Menyimpan Nilai');
     }
+
     public function render()
     {
         $this->data = AnswerLevel1::select('answer_level1.*',
