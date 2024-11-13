@@ -11,35 +11,35 @@
         <a class="text-sm font-medium text-red-500" href="{{ route('logout') }}">Logout</a>
     </div>
     <div
-        class="relative bg-game-map bg-top bg-no-repeat bg-cover md:bg-cover lg:bg-cover w-screen min-h-[60dvh] max-h-[60dvh] md:min-h-[130dvh] lg:min-h-[180dvh] xl:min-h-[300dvh] overflow-hidden">
+        class="relative bg-game-map bg-top bg-no-repeat bg-cover md:bg-cover lg:bg-cover w-screen min-h-[70dvh] max-h-[70dvh] md:min-h-[130dvh] lg:min-h-[180dvh] xl:min-h-[300dvh] overflow-hidden">
         <a wire:click="cekAksesLevel1">
             {{-- Level 1 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-1"
-                class="absolute w-12 md:w-24 lg:w-40 top-[17%] right-[29%] md:top-[14%] md:right-[28%] lg:top-[13%] lg:right-[27%] xl:top-[14%] xl:right-[30%]">
+                class="absolute w-12 md:w-24 lg:w-40 top-[16%] right-[29%] md:top-[14%] md:right-[28%] lg:top-[13%] lg:right-[27%] xl:top-[14%] xl:right-[30%]">
         </a>
 
         <a href="{{ route('murid.level2') }}">
             {{-- Level 2 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-2"
-                class="absolute w-12 md:w-24 lg:w-40 top-[32%] left-[15%] md:top-[25%] md:left-[11%] lg:top-[25%] lg:left-[11%] xl:top-[27%] xl:left-[15%]">
+                class="absolute w-12 md:w-24 lg:w-40 top-[30%] left-[15%] md:top-[25%] md:left-[11%] lg:top-[25%] lg:left-[11%] xl:top-[27%] xl:left-[15%]">
         </a>
 
         <a href="{{ route('murid.level3') }}">
             {{-- Level 3 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-3"
-                class="absolute w-12 md:w-24 lg:w-40 top-[49%] right-[17%] md:top-[41%] md:right-[13%] lg:top-[42%] lg:right-[14%] xl:top-[43%] xl:right-[18%]">
+                class="absolute w-12 md:w-24 lg:w-40 top-[48%] right-[17%] md:top-[41%] md:right-[13%] lg:top-[42%] lg:right-[14%] xl:top-[43%] xl:right-[18%]">
         </a>
 
         <a href="{{ route('murid.level4') }}">
             {{-- Level 4 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-4"
-                class="absolute w-12 md:w-24 lg:w-40 bottom-[25%] left-[20%] md:bottom-[35%] md:left-[18%] lg:top-[61%] lg:left-[20%] xl:top-[65%] xl:left-[22%]">
+                class="absolute w-12 md:w-24 lg:w-40 bottom-[23%] left-[20%] md:bottom-[35%] md:left-[18%] lg:top-[61%] lg:left-[20%] xl:top-[65%] xl:left-[22%]">
         </a>
 
         <a href="{{ route('murid.level5') }}">
             {{-- Level 5 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-5"
-                class="absolute w-12 md:w-24 lg:w-40 bottom-[11%] right-[15%] md:bottom-[25%] md:right-[14%] lg:top-[72%] lg:right-[14%] xl:top-[75%] xl:right-[18%]">
+                class="absolute w-12 md:w-24 lg:w-40 bottom-[12%] right-[15%] md:bottom-[25%] md:right-[14%] lg:top-[72%] lg:right-[14%] xl:top-[75%] xl:right-[18%]">
         </a>
     </div>
     <audio autoplay src="{{ asset('audio/audio.mp3') }}"></audio>
