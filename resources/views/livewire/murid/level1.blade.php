@@ -5,7 +5,7 @@ class="overflow-hidden min-h-screen flex flex-col gap-8 lg:gap-12 xl:gap-20 item
 x-data="{
           currentQuestion: 1,
           totalQuestions: {{ $data->where('role_name', auth()->user()->getRoleNames()->first())->count() }},
-          selectedAnswer: @entangle('selectedAnswer'), // Mengikat dengan Livewire
+          selectedAnswer: @entangle('selectedAnswer'),
           previousQuestion() {
               if (this.currentQuestion > 1) {
                   this.currentQuestion--;
@@ -19,14 +19,3 @@ x-data="{
       }">
     <x-murid.layout-level infoLevel="1" :data="$data" :endTime="$endTime" :startTime="$startTime" :levelTimeLeft="$countdown" :display="$display" :selectedAnswer="$selectedAnswer"></x-murid.layout-level>
 </form>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const startButton = document.getElementById('mulai');
-        const timer = countdown(5); // Ganti 5 dengan durasi countdown dalam menit
-
-        startButton.addEventListener('click', () => {
-            timer.init(); // Mulai countdown saat tombol "Mulai" diklik
-        });
-    });
-</script>

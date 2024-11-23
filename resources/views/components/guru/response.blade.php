@@ -30,23 +30,25 @@
             <img src="{{ asset('storage/answer_soal_level1/' . $image_reason) }}" alt="jawaban siswa" class="w-40">
         @endif
     </div>
-    <div class="flex flex-col gap-2 ">
-        <span class="text-sm">Masukan nilai untuk alasan siswa : {{ $point_reason }}</span>
-        <form wire:submit.prevent="simpanNilaiSoal1({{ $id }}, {{ $number }})" class="flex gap-2">
-            <!-- Gunakan wire:model dengan format point_reason.{{ $number }} -->
-            <input type="number" name="point_reason.{{ $number }}" wire:model="point_reason.{{ $number }}"
-                class="w-full block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:text-sm"
-                placeholder="nilai 1 - 100">
-            <button type="submit"
-                class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Save
-            </button>
-        </form>
+        <div class="flex flex-col gap-2 ">
+            <span class="text-sm"> {{ ($point_reason == 0) ? 'Masukan nilai untuk alasan siswa' : 'nilai alasan siswa : ' . $point_reason }}</span>
+            @if ($point_reason == 0)
+                <form wire:submit.prevent="simpanNilaiSoal1({{ $id }}, {{ $number }})" class="flex gap-2">
+                    <!-- Gunakan wire:model dengan format point_reason.{{ $number }} -->
+                    <input type="number" name="point_reason.{{ $number }}" wire:model="point_reason.{{ $number }}"
+                        class="w-full block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 placeholder:text-sm"
+                        placeholder="nilai 1 - 100">
+                    <button type="submit"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Save
+                    </button>
+                </form>
 
-        @error('point_reason.' . $number)
-            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-        @enderror
-    </div>
+                @error('point_reason.' . $number)
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            @endif
+        </div>
 @elseif ($responseType === 'upload')
     <div class="grid lg:grid-cols-2 gap-4">
         <div class="md:flex gap-4">

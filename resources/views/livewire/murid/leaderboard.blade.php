@@ -5,29 +5,22 @@
         <a href="{{ route('logout') }}" class="text-red-500 font-semibold font-base">Logout</a>
     </div>
     <div id="main"
-        style=" margin-left: 10px;
-                width: 1200px;
-                height: 800px;
-                max-width: 100%;
-                @media (min-width: 640px) {
-                    max-width: 150%;
-                }
-                @media (min-width: 768px) {
-                    max-width: 180%;
-                }
-                @media (min-width: 1024px) {
-                    max-width: 250%
-                }
-                @media (min-width: 1280px) {
-                    max-width: 300%
-                }"
-    ></div>
+        style="margin-left: 10px; width: 1200px; height: 800px; max-width: 100%;">
+    </div>
 </div>
+
 <script type="text/javascript">
     var myChart = echarts.init(document.getElementById('main'));
 
-    var data = [0, 0, 0, 0]; // Sample data
-    var categories = ['Polisi', 'Detektif', 'Petani', 'Nelayan']; // Categories
+    // Ambil skor dari Livewire
+    var data = [
+        @json($skor_polisi),
+        @json($skor_detektif),
+        @json($skor_nelayan),
+        @json($skor_petani)
+    ];
+
+    var categories = ['Polisi', 'Detektif', 'Nelayan', 'Petani'];
 
     var option = {
         xAxis: {
@@ -46,9 +39,6 @@
             name: 'Values',
             type: 'bar',
             data: data,
-            yAxis: {
-                padding: 100
-            },
             label: {
                 show: true,
                 position: 'right',
@@ -64,19 +54,4 @@
         animationEasingUpdate: 'linear'
     };
     myChart.setOption(option);
-
-    // Function to update data for racing effect
-    function run() {
-        for (var i = 0; i < data.length; ++i) {
-            data[i] += Math.round(Math.random() * 200); // Randomly update data
-        }
-        myChart.setOption({
-            series: [{
-                data: data,
-            }]
-        });
-    }
-
-    setInterval(run, 3000); // Update every 3 seconds
-
 </script>

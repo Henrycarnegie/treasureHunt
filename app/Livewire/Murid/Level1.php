@@ -46,13 +46,11 @@ class Level1 extends Component
 
     public function simpanJawaban()
     {
-        $userId = Auth::id();
         $roleName = Auth::user()->getRoleNames()->first();
-        $murid = Murid::where('users_id', $userId)->pluck('id')->first();
+        $murid = Murid::where('users_id', Auth::id())->first();
 
         if ($murid) {
             foreach ($this->soallevel1_id as $key => $id) {
-                // Periksa apakah indeks ada
                 if (!isset($this->selectedAnswer[$key])) {
                     $this->selectedAnswer[$key] = null;
                 }
@@ -66,9 +64,8 @@ class Level1 extends Component
 
                 $data = SoalLevel1::select('correct_answer')->where('id', $this->soallevel1_id[$key])->first();
 
-                // Buat instance baru dari AnswerLevel1
                 $answer = new AnswerLevel1();
-                $answer->murid_id = $murid;
+                $answer->murid_id = $murid->id;
                 $answer->soal_level1_id = $this->soallevel1_id[$key];
                 $answer->answer = $this->selectedAnswer[$key];
                 $answer->is_correct = ($this->selectedAnswer[$key] == $data->correct_answer) ? true : false;
@@ -78,6 +75,10 @@ class Level1 extends Component
 
                 $answer->update([
                     'total_point' => $answer->point_answer,
+                ]);
+
+                $murid->update([
+                    'score_level_1' => $murid->score_level_1 + $answer->total_point,
                 ]);
             }
         }

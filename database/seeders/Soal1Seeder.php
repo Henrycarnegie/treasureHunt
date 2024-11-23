@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class Soal1SeederPolisi extends Seeder
+class Soal1Seeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -3,6 +3,8 @@
 namespace App\Livewire\Guru;
 
 use App\Models\AnswerLevel1;
+use App\Models\Murid;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
@@ -30,7 +32,13 @@ class Respondent extends Component
 
         $answer = AnswerLevel1::find($id);
         $answer->point_reason = $this->point_reason[$number];
+        $answer->total_point += $this->point_reason[$number];
         $answer->save();
+
+        $murid = Murid::where('id', $answer->murid_id)->first();
+        $murid->score_level_1 += $this->point_reason[$number];
+        $murid->save();
+
 
         $this->reset('point_reason');
 
