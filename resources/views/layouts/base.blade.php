@@ -28,6 +28,33 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Styling Leaderboard -->
+    <style>
+        @media (min-width: 320px) {
+            #main {
+                width: 410px;
+                height: 500px;
+                margin-left: 0;
+                overflow: visible !important;
+            }
+        }
+
+        @media (min-width: 640px) {
+            #main {
+                width: 100%;
+                height: 750px;
+                margin-left: 0;
+            }
+        }
+        @media (min-width: 1024px) {
+            #main {
+                width: 100%;
+                height: 800px;
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiase">
