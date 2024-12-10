@@ -42,6 +42,6 @@
                 class="absolute w-12 md:w-24 lg:w-40 bottom-[12%] right-[15%] md:bottom-[25%] md:right-[14%] lg:top-[72%] lg:right-[14%] xl:top-[75%] xl:right-[18%]">
         </a>
     </div>
-    <audio autoplay src="{{ asset('audio/audio.mp3') }}"></audio>
+    <audio autoplay preload="auto"  loop src="{{ asset('audio/homepage.mp3') }}"></audio>
 
 </div>
