@@ -15,6 +15,10 @@
     <span class="text-sm">Jawaban =
         <span class="text-sm text-white">{{ $answer == null ? 'Jawaban Kosong' : $answer }}</span>
     </span>
+    <div class="md:flex gap-4">
+        <span class="text-sm">Lembar alasan = </span>
+        <img src="{{ asset('img/dummyResponse.png') }}" alt="jawaban siswa" class="w-40">
+    </div>
 @elseif ($responseType === 'pilganWithUpload')
     <span class="text-sm">Pertanyaan =
         <span class="text-sm text-white">{{ $question }}</span>

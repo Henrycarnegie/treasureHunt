@@ -10,9 +10,12 @@
     <div {{ $attributes->merge(['class' => $defaultClasses]) }}
         :class="{ '{{ $activeClasses }}': isOpen, '{{ $hoverClasses }}': !isOpen }" @click="isOpen = !isOpen"
         @click.outside="isOpen = false" x-cloak>
-        <span class="text-md font-medium">
-            {{ $slot }}
-        </span>
+        <div class="flex justify-between items-center">
+            <span class="text-md font-medium">
+                {{ $slot }}
+            </span>
+            <button class="px-4 py-2 bg-red-600 text-white rounded-md text-sm ">Reset jawaban</button>
+        </div>
 
         <!-- Detail Kelompok -->
         <div class="grid items-center gap-2 mt-2" x-show="isOpen" x-transition @click.stop>
