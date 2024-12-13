@@ -1,4 +1,4 @@
-@props(['infoLevel', 'levelTimeLeft', 'startTime', 'endTime', 'display' => '00:00', 'data'])
+@props(['infoLevel', 'levelTimeLeft' => 10, 'startTime', 'endTime', 'display' => '00:00', 'data'])
 
 @if ($infoLevel === '1')
 <!-- Modal preparation user -->
@@ -159,7 +159,7 @@
             </div>
         </aside>
 
-    <x-murid.layout-soal infoSoal="1"></x-murid.layout-soal>
+    <x-murid.layout-soal infoLevel="{{$infoLevel}}" infoSoal="1"></x-murid.layout-soal>
 
     {{-- Option Jawaban --}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 xl:gap-x-20 xl:gap-y-8 min-w-full">
@@ -175,7 +175,7 @@
                 type="submit"
                 class="rounded-md bg-indigo-600 py-2 px-8 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-indigo-700 focus:shadow-none active:bg-indigo-700 hover:bg-indigo-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">Next</button>
         </div>
-@elseif ($infoLevel === '3' || $infoLevel === '4')
+@elseif ($infoLevel === '3')
         {{-- Countdown Timer --}}
         <aside class="fixed top-[10px] right-[10px] z-10 max-w-max md:w-1/5 p-4 bg-gray-800 rounded-md text-white shadow-lg flex flex-col items-center">
             <h2 class="text-sm font-bold mb-2">Countdown</h2>
@@ -185,7 +185,27 @@
         </aside>
 
     {{-- Soal --}}
-    <x-murid.layout-soal infoSoal="1"></x-murid.layout-soal>
+    <x-murid.layout-soal infoLevel="{{$infoLevel}}" infoSoal="1"></x-murid.layout-soal>
+
+    {{-- Upload Foto --}}
+    <x-murid.upload-foto id_option="1"></x-murid.upload-foto>
+
+    {{-- Button Next --}}
+    <div class="w-full flex justify-end">
+        <button
+            class="rounded-md bg-indigo-600 py-2 px-8 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-indigo-700 focus:shadow-none active:bg-indigo-700 hover:bg-indigo-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">Next</button>
+    </div>
+@elseif ($infoLevel === '4')
+        {{-- Countdown Timer --}}
+        <aside class="fixed top-[10px] right-[10px] z-10 max-w-max md:w-1/5 p-4 bg-gray-800 rounded-md text-white shadow-lg flex flex-col items-center">
+            <h2 class="text-sm font-bold mb-2">Countdown</h2>
+            <div class="text-lg font-mono" x-data="countdown({{ $levelTimeLeft }})" x-init="init()" x-text="display">
+                {{ $display }}
+            </div>
+        </aside>
+
+    {{-- Soal --}}
+    <x-murid.layout-soal infoLevel="{{$infoLevel}}" infoSoal="1"></x-murid.layout-soal>
 
     {{-- Upload Foto --}}
     <x-murid.upload-foto id_option="1"></x-murid.upload-foto>
