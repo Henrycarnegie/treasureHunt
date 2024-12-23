@@ -1,7 +1,7 @@
 @section('title', 'Level 1')
 
 <div class="p-4 sm:ml-64">
-    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-200 mt-14 min-h-screen">
+    <div class="p-4 border-2 border-gray-200 rounded-lg dark:border-gray-200 mt-14 min-h-screen" @click.stop>
         <div class="grid gap-4 pt-4">
             <x-guru.guru-header>Kumpulan soal quiz</x-guru.guru-header>
             <x-guru.set-time waktuLevel="true" infoWaktu="{{ $waktu_level1 ?? 0 }}"/>
@@ -14,6 +14,7 @@
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"
+                    infoLevel="1"
                 />
             </x-guru.modal-soal>
 
@@ -24,6 +25,7 @@
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"
+                    infoLevel="1"
                 />
             </x-guru.modal-soal>
 
@@ -34,6 +36,7 @@
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"
+                    infoLevel="1"
                 />
             </x-guru.modal-soal>
 
@@ -44,6 +47,7 @@
                     type_question="main_question"
                     :data="$data"
                     :fullOption="false"
+                    infoLevel="1"
                 />
             </x-guru.modal-soal>
 
@@ -54,6 +58,7 @@
                     type_question="secondary_question"
                     :data="$data"
                     :fullOption="false"
+                    infoLevel="1"
                 />
             </x-guru.modal-soal>
 

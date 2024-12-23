@@ -12,7 +12,7 @@
     </div>
     <div
         class="relative bg-game-map bg-top bg-no-repeat bg-cover md:bg-cover lg:bg-cover w-screen min-h-[70dvh] max-h-[70dvh] md:min-h-[130dvh] lg:min-h-[180dvh] xl:min-h-[300dvh] overflow-hidden">
-        <a wire:click="cekAksesLevel1">
+        <a wire:click="cekAksesLevel1" class="cursor-pointer">
             {{-- Level 1 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-1"
                 class="absolute w-12 md:w-24 lg:w-40 top-[16%] right-[29%] md:top-[14%] md:right-[28%] lg:top-[13%] lg:right-[27%] xl:top-[14%] xl:right-[30%]">
@@ -42,6 +42,6 @@
                 class="absolute w-12 md:w-24 lg:w-40 bottom-[12%] right-[15%] md:bottom-[25%] md:right-[14%] lg:top-[72%] lg:right-[14%] xl:top-[75%] xl:right-[18%]">
         </a>
     </div>
-    <audio autoplay preload="auto"  loop src="{{ asset('audio/homepage.mp3') }}"></audio>
+    {{-- <audio autoplay preload="auto"  loop src="{{ asset('audio/homepage.mp3') }}"></audio> --}}
 
 </div>

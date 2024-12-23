@@ -1,79 +1,145 @@
-<div class="min-w-fit h-screen place-items-center bg-indigo-100 overflow-hidden">
-    <div class="flex items-center justify-around w-full px-4 bg-indigo-300">
-        <a href="{{ route('murid.home') }}" class="text-slate-700 font-semibold font-base">Back</a>
-        <h1 class="text-2xl font-bold text-center py-8">Leaderboard</h1>
-        <a href="{{ route('logout') }}" class="text-red-500 font-semibold font-base">Logout</a>
+<div class="min-w-fit h-screen flex flex-col bg-indigo-100 overflow-hidden">
+    <div class="flex items-center justify-between w-full px-4 py-3 bg-indigo-300 shadow-md">
+        <a href="{{ route('murid.home') }}" class="text-slate-700 font-semibold hover:text-slate-900 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+        </a>
+        <h1 class="text-2xl font-bold text-center text-slate-800">Leaderboard</h1>
+        <a href="{{ route('logout') }}" class="text-red-500 font-semibold hover:text-red-700 transition-colors">
+            Logout
+        </a>
     </div>
-    <div id="main">
+    <div class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-4xl bg-white rounded-lg shadow-xl overflow-hidden">
+            <div id="main" class="w-full h-[500px]"></div>
+        </div>
     </div>
-</div>
 
-<script type="text/javascript">
-    var myChart = echarts.init(document.getElementById('main'));
+    <script>
+        // Pass avatars and scores from PHP to JavaScript
+        var avatars = @json($avatars);
+        var scores = {
+            'Polisi': @json($skor_polisi),
+            'Detektif': @json($skor_detektif),
+            'Nelayan': @json($skor_nelayan),
+            'Petani': @json($skor_petani)
+        };
+    </script>
 
-    // Ambil skor dari Livewire
-    var actualData = [
-        @json($skor_polisi),
-        @json($skor_detektif),
-        @json($skor_nelayan),
-        @json($skor_petani)
-    ];
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
 
-    var categories = ['Polisi', 'Detektif', 'Nelayan', 'Petani'];
+            var myChart = echarts.init(document.getElementById('main'));
 
-    // Set initial data to 0 for animation effect
-    var initialData = [0, 0, 0, 0];
+            // Definisikan warna untuk setiap kategori
+            var categoryStyles = {
+                'Polisi': {
+                    color: '#3B82F6',
+                    avatar: avatars['polisi']
+                },
+                'Detektif': {
+                    color: '#10B981',
+                    avatar: avatars['detektif']
+                },
+                'Nelayan': {
+                    color: '#F43F5E',
+                    avatar: avatars['nelayan']
+                },
+                'Petani': {
+                    color: '#8B5CF6',
+                    avatar: avatars['petani']
+                }
+            };
 
-    var option = {
-        xAxis: {
-            max: 'dataMax',
-        },
-        yAxis: {
-            type: 'category',
-            data: categories,
-            inverse: true,
-            animationDuration: 300,
-            animationDurationUpdate: 300,
-            max: 3
-        },
-        series: [{
-            realtimeSort: true,
-            type: 'bar',
-            barWidth: '30%',
-            barGap: '20%',
-            barCategoryGap: '40%',
-            data: initialData, // Use initial data
-            emphasis: {
-                focus: 'series',
-            },
-            label: {
-                label: 'labelOption',
-                color: '#000',
-                fontSize: 24,
-                fontFamily: 'Inter',
-                show: true,
-                position: 'right',
-                valueAnimation: true
-            },
-            itemStyle: {
-                color: 'blue' // Set bar color
-            }
-        }],
-        animationDuration: 0,
-        animationDurationUpdate: 3000,
-        animationEasing: 'linear',
-        animationEasingUpdate: 'linear'
-    };
+            var categories = ['Polisi', 'Detektif', 'Nelayan', 'Petani'];
+            var actualData = categories.map(category => scores[category]);
+            var initialData = [0, 0, 0, 0];
 
-    // Set initial option
-    myChart.setOption(option);
+            var option = {
+                grid: {
+                    left: '15%',
+                    right: '10%'
+                },
+                xAxis: {
+                    max: 'dataMax',
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            type: 'dashed',
+                            color: '#e0e0e0'
+                        }
+                    }
+                },
+                yAxis: {
+                    type: 'category',
+                    data: categories,
+                    inverse: true,
+                    animationDuration: 300,
+                    animationDurationUpdate: 300,
+                    max: 3,
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: {
+                        formatter: function(value) {
+                            return '{' + value + '| }  ' + value;
+                        },
+                        rich: categories.reduce((acc, category) => {
+                            acc[category] = {
+                                width: 40,
+                                height: 40,
+                                backgroundColor: {
+                                    image: categoryStyles[category].avatar
+                                },
+                                borderRadius: 20
+                            };
+                            return acc;
+                        }, {})
+                    }
+                },
+                series: [{
+                    realtimeSort: true,
+                    type: 'bar',
+                    barWidth: '50%',
+                    data: initialData,
+                    emphasis: {
+                        focus: 'series',
+                    },
+                    label: {
+                        show: true,
+                        position: 'right',
+                        color: '#000',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        valueAnimation: true
+                    },
+                    itemStyle: {
+                        color: function(params) {
+                            return categoryStyles[categories[params.dataIndex]].color;
+                        },
+                        borderRadius: [0, 10, 10, 0]
+                    }
+                }],
+                animationDuration: 0,
+                animationDurationUpdate: 3000,
+                animationEasing: 'linear',
+                animationEasingUpdate: 'linear'
+            };
 
-    // Update chart data after a delay to allow animation from 0
-    setTimeout(function() {
-        myChart.setOption({
-            series: [{
-                data: actualData // Update with actual data
-            }]
+            // Set initial option
+            myChart.setOption(option);
+
+            // Update chart data after a delay to allow animation from 0
+            setTimeout(function() {
+                myChart.setOption({
+                    series: [{
+                        data: actualData // Update with actual data
+                    }]
+                });
+            }, 300);
         });
-    }, 300); // Delay of 1 second
-</script>
+    </script>
+</div>

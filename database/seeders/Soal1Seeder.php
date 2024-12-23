@@ -26,7 +26,7 @@ class Soal1Seeder extends Seeder
         SoalLevel1::insert([
             [
                 'role_name' => 'polisi',
-                'type_question' => 'math_question',
+                'type_question' => 'main_question',
                 'question_text' => 'Berapakah hasil dari 1 + 2 ?',
                 'question_image' => null,
                 'answer_a' => '3',
@@ -37,7 +37,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'polisi',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 2 - 3 ?',
                 'question_image' => null,
                 'answer_a' => '-2',
@@ -48,7 +48,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'detektif',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 4 + 5 ?',
                 'question_image' => null,
                 'answer_a' => '9',
@@ -59,7 +59,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'detektif',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 6 - 7 ?',
                 'question_image' => null,
                 'answer_a' => '2',
@@ -70,7 +70,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'nelayan',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 8 + 9 ?',
                 'question_image' => null,
                 'answer_a' => '17',
@@ -81,7 +81,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'nelayan',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 10 - 11 ?',
                 'question_image' => null,
                 'answer_a' => '3',
@@ -92,7 +92,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'petani',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 12 + 13 ?',
                 'question_image' => null,
                 'answer_a' => '25',
@@ -103,7 +103,7 @@ class Soal1Seeder extends Seeder
             ],
             [
                 'role_name' => 'petani',
-                'type_question' => 'math_question',
+                'type_question' => 'maain_question',
                 'question_text' => 'Berapakah hasil dari 14 - 15 ?',
                 'question_image' => null,
                 'answer_a' => '4',

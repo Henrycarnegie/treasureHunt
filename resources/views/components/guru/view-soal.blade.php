@@ -7,8 +7,17 @@
 
     {{-- Pertanyaan dan Jawaban --}}
     <div class="flex flex-col" x-show="viewSoalOpen" x-collapse>
-        <span>Pertanyaan: {{ $question->question_text }}</span>
-        <span>gambar: <img src="{{ url(asset('storage/soal_level1/' . $question->question_image)) }}" alt="gambar pertanyaan"></span>
+        <span class="mb-2">Pertanyaan: {{ $question->question_text }}</span>
+        <div class="flex items-start gap-4 mb-2">
+            <span>
+                gambar:
+            </span>
+            <img
+                src="{{ url(asset('storage/soal_level'.$infoLevel.'/' . $question->question_image)) }}"
+                alt="gambar pertanyaan"
+                class="h-48 w-auto"
+            >
+        </div>
         <span>Jawaban: {{ $question->correct_answer }}</span>
     </div>
 </div>

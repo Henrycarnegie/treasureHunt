@@ -17,53 +17,24 @@
             </div>
         </div>
         <div class="grid grid-cols-1 mb-4">
-            <div class="bg-white shadow-md rounded-md p-2 lg:p-4  mx-auto min-w-full mt-14">
+            <div class="bg-white shadow-md rounded-md p-2 lg:p-4 mx-auto min-w-full mt-14">
                 <h2 class="text-xl font-semibold mb-4">Leaderboard Kelompok</h2>
                 <ul>
-                    <li class="flex items-center justify-between py-2 border-b border-gray-300">
-                        <div class="flex items-center">
-                            <div class="flex justify-center items-center px-2 min-w-8">
-                                <span class="text-lg font-semibold">1</span>
+                    @foreach ($scores as $key => $score)
+                        <li class="flex items-center justify-between py-2 border-b border-gray-300">
+                            <div class="flex items-center">
+                                <div class="flex justify-center items-center px-2 min-w-8">
+                                    <span class="text-lg font-semibold">{{ array_search($key, [2 => 'Polisi', 3 => 'Detektif', 4 => 'Nelayan', 5 => 'Petani']) }}</span>
+                                </div>
+                                <img src="{{ asset('/img/' . strtolower($score['name']) . '.png') }}"
+                                    alt="User Avatar"
+                                    class="w-8 h-8 rounded-full mr-2 lg:mr-4">
+                                    <span class="text-gray-800 font-semibold text-md lg:text-lg">{{ $score['name'] }}</span>
+
                             </div>
-                            <img src="https://via.placeholder.com/48" alt="User Avatar"
-                                class="w-8 h-8 rounded-full mr-2 lg:mr-4">
-                            <span class="text-gray-800 font-semibold text-md lg:text-lg">Polisi</span>
-                        </div>
-                        <span class="text-orange-500 font-semibold text-sm lg:text-base">1000 Points</span>
-                    </li>
-                    <li class="flex items-center justify-between py-2 border-b border-gray-300">
-                        <div class="flex items-center">
-                            <div class="flex justify-center items-center px-2 min-w-8">
-                                <span class="text-lg font-semibold">2</span>
-                            </div>
-                            <img src="https://via.placeholder.com/48" alt="User Avatar"
-                                class="w-8 h-8 rounded-full mr-2 lg:mr-4">
-                            <span class="text-gray-800 font-semibold text-md lg:text-lg">Detektif</span>
-                        </div>
-                        <span class="text-orange-500 font-semibold text-sm lg:text-base">950 Points</span>
-                    </li>
-                    <li class="flex items-center justify-between py-2 border-b border-gray-300">
-                        <div class="flex items-center">
-                            <div class="flex justify-center items-center px-2 min-w-8">
-                                <span class="text-lg font-semibold">3</span>
-                            </div>                            
-                            <img src="https://via.placeholder.com/48" alt="User Avatar"
-                                class="w-8 h-8 rounded-full mr-2 lg:mr-4">
-                            <span class="text-gray-800 font-semibold text-md lg:text-lg">Nelayan</span>
-                        </div>
-                        <span class="text-orange-500 font-semibold text-sm lg:text-base">850 Points</span>
-                    </li>
-                    <li class="flex items-center justify-between py-2">
-                        <div class="flex items-center">
-                            <div class="flex justify-center items-center px-2 min-w-8">
-                                <span class="text-lg font-semibold">4</span>
-                            </div>
-                            <img src="https://via.placeholder.com/48" alt="User Avatar"
-                                class="w-8 h-8 rounded-full mr-2 lg:mr-4">
-                            <span class="text-gray-800 font-semibold text-md lg:text-lg">Petani</span>
-                        </div>
-                        <span class="text-orange-500 font-semibold text-sm lg:text-base">800 Points</span>
-                    </li>
+                            <span class="text-orange-500 font-semibold text-sm lg:text-base">{{ $score['score'] }} Points</span>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

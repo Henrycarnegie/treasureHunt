@@ -14,7 +14,6 @@
             <span class="text-md font-medium">
                 {{ $slot }}
             </span>
-            <button class="px-4 py-2 bg-red-600 text-white rounded-md text-sm ">Reset jawaban</button>
         </div>
 
         <!-- Detail Kelompok -->

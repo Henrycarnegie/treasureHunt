@@ -24,10 +24,13 @@
         @if ($waktuSoal)
             <div class="md:inline-flex items-center gap-2">
                 <span class="">Waktu untuk tiap Soal : {{ $infoWaktu }}</span>
-                <div class="flex gap-2">
-                    <input type="time" name="question_time" class="border rounded px-2 py-1">
+                <form wire:submit.prevent="simpanWaktuSoal">
+                    <input type="number" wire:model="level_time" name="level_time" name="minutes" min="0" max="59" class="border rounded px-2 py-1" placeholder="Menit">
+                    @error('level_time')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
                     <button type="submit" class="bg-indigo-500 px-4 py-2 text-white rounded">Simpan</button>
-                </div>
+                </form>
             </div>
         @endif
     </div>

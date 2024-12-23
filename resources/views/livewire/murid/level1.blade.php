@@ -5,7 +5,6 @@ class="overflow-hidden min-h-screen flex flex-col gap-8 lg:gap-12 xl:gap-20 item
 x-data="{
           currentQuestion: 1,
           totalQuestions: {{ $data->where('role_name', auth()->user()->getRoleNames()->first())->count() }},
-          selectedAnswer: @entangle('selectedAnswer'),
           previousQuestion() {
               if (this.currentQuestion > 1) {
                   this.currentQuestion--;
@@ -17,5 +16,6 @@ x-data="{
               }
           }
       }">
-    <x-murid.layout-level infoLevel="1" :data="$data" :endTime="$endTime" :startTime="$startTime" :levelTimeLeft="$countdown" :display="$display" :selectedAnswer="$selectedAnswer"></x-murid.layout-level>
+
+    <x-murid.layout-level infoLevel="1" :data="$data" :endTime="$endTime" :startTime="$startTime" :levelTimeLeft="$countdown" :display="$display"></x-murid.layout-level>
 </form>

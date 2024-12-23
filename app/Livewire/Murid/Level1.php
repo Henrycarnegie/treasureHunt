@@ -18,14 +18,16 @@ class Level1 extends Component
     use WithFileUploads;
     use LivewireAlert;
 
-    public $countdown, $startTime, $endTime, $display = '00:00', $showModal = true;
+    public $countdown, $startTime, $endTime = null, $display = '00:00', $showModal = true;
     public $data, $selectedAnswer = [], $answer_image = [], $soallevel1_id = [];
 
     public function mount()
     {
+        $this->data = SoalLevel1::all();
+
         $level1 = ModelsLevel1::first();
         $data = FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first();
-        if( null !== $data){
+        if( $data != null){
             $this->startTime = $data->created_at;
             $this->endTime = $data->end_time;
             $this->showModal = false;
@@ -33,6 +35,7 @@ class Level1 extends Component
 
         $this->countdown = $level1 ? $level1->waktu_level1 : 0;
     }
+
 
     public function startGame($endTime)
     {
@@ -103,7 +106,6 @@ class Level1 extends Component
 
     public function render()
     {
-        $this->data = SoalLevel1::all();
         return view('livewire.murid.level1')->extends('layouts.app');
     }
 }
