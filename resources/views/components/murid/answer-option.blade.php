@@ -6,7 +6,7 @@
            value="{{ $value }}"
            wire:model="selectedAnswer.{{ $id_option }}"  {{-- Mengikat ke selectedAnswer dengan id_option --}}
            class="peer absolute opacity-0">
-    <div class="cursor-pointer flex justify-center bg-gray-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-700 text-amber-400 hover:bg-amber-500 hover:text-white shadow-lg px-4 py-6 text-lg font-bold transition-all peer-checked:bg-amber-500 peer-checked:text-white">
+    <div class="cursor-pointer flex justify-center bg-gray-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-700 text-amber-400 hover:bg-amber-200 hover:text-slate-800 shadow-lg px-4 py-6 text-lg font-bold transition-all peer-checked:bg-amber-500 peer-checked:text-white">
         {{ $slot }}
     </div>
 </label>
