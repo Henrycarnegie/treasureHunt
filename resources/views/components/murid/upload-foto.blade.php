@@ -11,9 +11,9 @@
                 // Reset error message
                 this.errorMessage = '';
 
-                // Check file size (1MB = 1024 * 1024 bytes)
-                if (file.size > 1024 * 1024) {
-                    this.errorMessage = 'Ukuran file terlalu besar. Maksimum 1MB';
+                // Check file size (3MB)
+                if (file.size > (10 * 1024 * 1024)) {
+                    this.errorMessage = 'Ukuran file terlalu besar. Maksimum 10MB';
                     this.$refs.fileInput.value = '';
                     return false;
                 }
@@ -41,7 +41,7 @@
                         <span class="font-semibold">Upload jawaban disini</span>
                         Klik untuk upload
                     </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG atau JPG (Max. 1MB)</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">PNG atau JPG (Max. 10MB)</p>
                 </div>
             </label>
 
@@ -60,7 +60,7 @@
             </div>
 
             <input id="dropzone-file-{{ $id_option }}"
-                   type="file"
+                   type="file" capture="environment"
                    class="hidden"
                    accept="image/png,image/jpeg,image/jpg"
                    x-ref="fileInput"

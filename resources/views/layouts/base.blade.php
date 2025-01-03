@@ -12,7 +12,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('img/logo.svg') }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}">
 
     {{-- Font Inter --}}
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">

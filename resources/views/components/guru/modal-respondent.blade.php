@@ -1,4 +1,4 @@
-@props(['data', 'muridId'])
+@props(['level1', 'level2', 'level3', 'muridId'])
 
 @php
     $defaultClasses = 'flex flex-col border-2 border-gray-100 p-3 md:p-4 rounded-md cursor-pointer';
@@ -20,47 +20,33 @@
         <div class="grid items-center gap-2 mt-2" x-show="isOpen" x-transition @click.stop>
             {{-- Level 1 --}}
             <x-guru.respondent-level infoLevel="1">
-                @foreach ($data->where('murid_id', $muridId) as $item)
+                @foreach ($level1->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soal_question_text" :answer="$item->answer" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                        <x-guru.response level="1" :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soal_question_text" :answer="$item->answer" :is_correct="$item->is_correct" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>
 
             {{-- Level 2 --}}
             <x-guru.respondent-level infoLevel="2">
-                <x-guru.respondent-soal infoSoal="1">
-                    <x-guru.response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
-                <x-guru.respondent-soal infoSoal="2">
-                    <x-guru.response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
-                <x-guru.respondent-soal infoSoal="3">
-                    <x-guru.response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
-                <x-guru.respondent-soal infoSoal="4">
-                    <x-guru.response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
+                @foreach ($level2->where('murid_id', $muridId) as $item)
+                    <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
+                        <x-guru.response level="2" :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soal_question_text" :answer="$item->answer" :is_correct="$item->is_correct" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                    </x-guru.respondent-soal>
+                @endforeach
             </x-guru.respondent-level>
 
             {{-- Level 3 --}}
             <x-guru.respondent-level infoLevel="3">
-                <x-guru.respondent-soal infoSoal="1">
-                    <x-guru.response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
-                <x-guru.respondent-soal infoSoal="2">
-                    <x-guru.response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
-                <x-guru.respondent-soal infoSoal="3">
-                    <x-guru.response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
-                <x-guru.respondent-soal infoSoal="4">
-                    <x-guru.response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
-                </x-guru.respondent-soal>
+                @foreach ($level3->where('murid_id', $muridId) as $item)
+                    <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
+                        <x-guru.response level="3" :number="$loop->iteration" responseType="upload" :question="$item->soal_question_text" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                    </x-guru.respondent-soal>
+                @endforeach
             </x-guru.respondent-level>
 
             {{-- Level 4 --}}
-            <x-guru.respondent-level infoLevel="4">
+            {{-- <x-guru.respondent-level infoLevel="4">
                 <x-guru.respondent-soal infoSoal="1">
                     <x-guru.response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
                 </x-guru.respondent-soal>
@@ -73,10 +59,10 @@
                 <x-guru.respondent-soal infoSoal="4">
                     <x-guru.response responseType="upload" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
                 </x-guru.respondent-soal>
-            </x-guru.respondent-level>
+            </x-guru.respondent-level> --}}
 
             {{-- Level 5 --}}
-            <x-guru.respondent-level infoLevel="5">
+            {{-- <x-guru.respondent-level infoLevel="5">
                 <x-guru.respondent-soal infoSoal="1">
                     <x-guru.response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
                 </x-guru.respondent-soal>
@@ -89,7 +75,7 @@
                 <x-guru.respondent-soal infoSoal="4">
                     <x-guru.response responseType="pilgan" question="Berapa hasil dari 2+2?" answer="4"></x-guru.response>
                 </x-guru.respondent-soal>
-            </x-guru.respondent-level>
+            </x-guru.respondent-level> --}}
         </div>
     </div>
 </div>

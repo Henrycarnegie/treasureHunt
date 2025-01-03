@@ -57,7 +57,7 @@ class Level1 extends Component
             'role_name' => 'required',
             'type_question' => 'required',
             'question_text' => 'required|min:3|max:255',
-            'question_image' => 'nullable|file|image|max:1024',
+            'question_image' => 'nullable|image|max:1024',
             'answer_a' => 'required|min:1|max:255',
             'answer_b' => 'required|min:1|max:255',
             'correct_answer' => 'required',

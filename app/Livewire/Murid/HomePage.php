@@ -3,7 +3,9 @@
 namespace App\Livewire\Murid;
 
 use App\Models\AnswerLevel1;
+use App\Models\AnswerLevel2;
 use App\Models\FirstAcccessLevel1;
+use App\Models\FirstAcccessLevel2;
 use App\Models\Murid;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +46,39 @@ class HomePage extends Component
             }
         } else {
             return redirect(route('murid.level1'));
+        }
+    }
+
+    public function cekAksesLevel2(){
+        $auth = Auth::user();
+        $data = FirstAcccessLevel2::where('role_name', $auth->getRoleNames()->first())->first();
+        $murid = Murid::where('users_id', $auth->id)->first();
+        $answer = AnswerLevel2::where('murid_id', $murid->id)->get();
+
+        if ($data !== null) {
+            $endTimeString = $data->end_time;
+            $createdAt = $data->created_at;
+
+            $endTime = Carbon::createFromTimestampMs($endTimeString);
+            $createdAtCarbon = Carbon::parse($createdAt);
+
+            $remainingTime = $endTime->diffInMilliseconds($createdAtCarbon);
+
+            if ($remainingTime <= 0) {
+                if(count($answer) > 0){
+                    $this->alert('info', 'Level 2 Selesai', [
+                        'text' => 'Anda Telah Mengerjakan level 2 dengan selesai.',
+                        'position' => 'center',
+                        'timer' => 3000,
+                        'toast' => false,
+                        'timerProgressBar' => true,
+                    ]);
+                }else{
+                    return redirect(route('murid.level2'));
+                }
+            }
+        } else {
+            return redirect(route('murid.level2'));
         }
     }
 

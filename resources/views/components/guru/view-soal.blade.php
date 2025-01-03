@@ -18,6 +18,8 @@
                 class="h-48 w-auto"
             >
         </div>
-        <span>Jawaban: {{ $question->correct_answer }}</span>
+        @if ($infoLevel != '3')
+            <span>Jawaban: {{ $question->correct_answer }}</span>
+        @endif
     </div>
 </div>

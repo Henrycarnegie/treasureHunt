@@ -27,7 +27,8 @@ class Level1 extends Component
 
         $level1 = ModelsLevel1::first();
         $data = FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first();
-        if( $data != null){
+
+        if ($data) {
             $this->startTime = $data->created_at;
             $this->endTime = $data->end_time;
             $this->showModal = false;
@@ -36,15 +37,16 @@ class Level1 extends Component
         $this->countdown = $level1 ? $level1->waktu_level1 : 0;
     }
 
-
     public function startGame($endTime)
     {
-        if( null == FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first()){
+        $existingAccess = FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first();
+        if (!$existingAccess) {
             FirstAcccessLevel1::create([
                 'role_name' => Auth::user()->getRoleNames()->first(),
-                'end_time' => $endTime
+                'end_time' => $endTime,
             ]);
         }
+        $this->endTime = $endTime;
     }
 
     public function simpanJawaban()
@@ -54,48 +56,40 @@ class Level1 extends Component
 
         if ($murid) {
             foreach ($this->soallevel1_id as $key => $id) {
-                if (!isset($this->selectedAnswer[$key])) {
-                    $this->selectedAnswer[$key] = null;
+                $selectedAnswer = $this->selectedAnswer[$key] ?? null;
+                $uploadedImage = $this->answer_image[$key] ?? null;
+
+                $customFileName = null;
+                if ($uploadedImage instanceof TemporaryUploadedFile) {
+                    $customFileName = 'answer_soal_level1' . $roleName . '_' . $key . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
+                    $uploadedImage->storeAs('answer_soal_level1', $customFileName, 'public');
                 }
 
-                if (!isset($this->answer_image[$key])) {
-                    $this->answer_image[$key] = null;
-                } else {
-                    $customFileName = 'answer_soal1_' . $roleName . '_' . $key . '_' . time() . '.' . $this->answer_image[$key]->getClientOriginalExtension();
-                    $this->answer_image[$key]->storeAs('answer_soal_level1', $customFileName, 'public');
-                }
+                $correctAnswer = SoalLevel1::where('id', $id)->value('correct_answer');
+                $isCorrect = $selectedAnswer === $correctAnswer;
+                $pointAnswer = $isCorrect ? 50 : 0;
 
-                $data = SoalLevel1::select('correct_answer')->where('id', $this->soallevel1_id[$key])->first();
-
-                $answer = new AnswerLevel1();
-                $answer->murid_id = $murid->id;
-                $answer->soal_level1_id = $this->soallevel1_id[$key];
-                $answer->answer = $this->selectedAnswer[$key];
-                $answer->is_correct = ($this->selectedAnswer[$key] == $data->correct_answer) ? true : false;
-                $answer->image_reason = (isset($this->answer_image[$key])) ? $customFileName : null;
-                $answer->point_answer = ($this->selectedAnswer[$key] == $data->correct_answer) ? 50 : 0;
-                $answer->save();
-
-                $answer->update([
-                    'total_point' => $answer->point_answer,
+                AnswerLevel1::create([
+                    'murid_id' => $murid->id,
+                    'soal_level1_id' => $id,
+                    'answer' => $selectedAnswer,
+                    'is_correct' => $isCorrect,
+                    'image_reason' => $customFileName,
+                    'point_answer' => $pointAnswer,
+                    'total_point' => $pointAnswer,
                 ]);
 
-                $murid->update([
-                    'score_level_1' => $murid->score_level_1 + $answer->total_point,
-                ]);
+                $murid->increment('score_level_1', $pointAnswer);
             }
         }
+
         foreach ($this->answer_image as $file) {
             if ($file instanceof TemporaryUploadedFile) {
                 $file->delete();
             }
         }
-        $this->reset([
-            'countdown',
-            'data',
-            'selectedAnswer',
-            'answer_image',
-        ]);
+
+        $this->reset(['countdown', 'data', 'selectedAnswer', 'answer_image']);
         return redirect()->route('murid.home');
     }
 

@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('answer_level2', function (Blueprint $table) {
+        Schema::create('answer_level3', function (Blueprint $table) {
             $table->id();
             $table->foreignId('murid_id')->constrained('murid')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('soal_level2_id')->constrained('soal_level2')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('answer')->nullable();
-            $table->boolean('is_correct');
+            $table->foreignId('soal_level3_id')->constrained('soal_level3')->onDelete('cascade')->onUpdate('cascade');
             $table->string('image_reason')->nullable();
-            $table->integer('point_answer')->default(0);
             $table->integer('point_reason')->default(0);
             $table->integer('total_point')->default(0);
             $table->timestamps();
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('answer_level2');
+        Schema::dropIfExists('answer_level3');
     }
 };

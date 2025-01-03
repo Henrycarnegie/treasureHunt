@@ -15,14 +15,9 @@ class Level3 extends Component
     use WithFileUploads;
     use LivewireAlert;
 
-    public $waktu_level1, $data, $tambahSoalOpen = false, $id;
+    public $waktu_level3, $data, $tambahSoalOpen = false, $id;
     public $question_text, $question_image, $level_time;
     protected $listeners = ['deleteConfirmed' => 'handleConfirm'];
-
-    public function mount()
-    {
-        $this->data = BoxLevel3::with('soalLevel3')->get();
-    }
 
     public function simpanWaktuLevel()
     {
@@ -32,10 +27,10 @@ class Level3 extends Component
 
         $this->validate($rules);
 
-        $waktu_level1 = ModelsLevel3::first();
+        $waktu_level3 = ModelsLevel3::first();
 
-        if (isset($waktu_level1)) {
-            $waktu_level1->update([
+        if (isset($waktu_level3)) {
+            $waktu_level3->update([
                 'waktu_level3' => $this->level_time,
             ]);
         }else{
@@ -57,7 +52,6 @@ class Level3 extends Component
         $rules = [
             'question_text' => 'required|min:3|max:255',
             'question_image' => 'nullable|file|image|max:1024',
-            'box_id' => 'required',
         ];
 
         $customMessages = [
@@ -82,14 +76,13 @@ class Level3 extends Component
 
         // Menyimpan data soal ke database
         SoalLevel3::create([
-            'box_id' => $this->box_id,
+            'box_id' => $boxId,
             'question_text' => $this->question_text,
             'question_image' => $customFileName,
         ]);
 
         // Reset semua properti untuk mengosongkan data dan menghapus file temporary
         $this->reset([
-            'box_id',
             'question_text',
             'question_image',
         ]);
@@ -147,6 +140,8 @@ class Level3 extends Component
 
     public function render()
     {
+        $this->data = BoxLevel3::with('soalLevel3')->get();
+        $this->waktu_level3 = ModelsLevel3::value('waktu_level3');
         return view('livewire.guru.level3')->extends('layouts.guru.app');
     }
 }
