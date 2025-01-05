@@ -56,7 +56,7 @@
 
             {{-- Level 5 --}}
             <x-guru.respondent-level infoLevel="5">
-                @foreach ($level4->where('murid_id', $muridId) as $item)
+                @foreach ($level5->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
                         <x-guru.response level="5" :number="$loop->iteration" responseType="pilgan" :question="$item->soal_question_text" :answer="$item->answer" :is_correct="$item->is_correct"></x-guru.response>
                     </x-guru.respondent-soal>
