@@ -16,5 +16,5 @@ x-data="{
               }
           }
       }">
-    <x-murid.layout-level infoLevel="2" :data="$data" :endTime="$endTime" :startTime="$startTime" :levelTimeLeft="$countdown" :display="$display"></x-murid.layout-level>
+    <x-murid.layout-level infoLevel="2" :data="$data" :endTime="$endTime" :startTime="$startTime" :levelTimeLeft="$countdown" :display="$display" :deskripsi_opening="$deskripsi_opening"></x-murid.layout-level>
 </form>

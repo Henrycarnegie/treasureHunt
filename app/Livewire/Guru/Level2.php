@@ -15,7 +15,7 @@ class Level2 extends Component
     use LivewireAlert;
 
     public $waktu_level2, $data, $tambahSoalOpen = false, $id;
-    public $question_text, $question_image, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $level_time;
+    public $question_text, $question_image, $answer_a, $answer_b, $answer_c, $answer_d, $correct_answer, $level_time, $deskripsi_opening, $modalOpening = false;
     protected $listeners = ['deleteConfirmed' => 'handleConfirm'];
 
 
@@ -140,10 +140,46 @@ class Level2 extends Component
 
         $this->alert('success', 'Berhasil Menambahkan soal');
     }
+    public function simpanOpening()
+    {
+        $rules = [
+            'deskripsi_opening' => 'required|min:3|max:255',
+        ];
+
+        $customMessages = [
+            'deskripsi_opening.required' => 'Deskripsi opening harus diisi.',
+            'deskripsi_opening.min' => 'Deskripsi opening harus minimal 3 karakter.',
+            'deskripsi_opening.max' => 'Deskripsi opening tidak boleh lebih dari 255 karakter.',
+        ];
+
+        $this->validate($rules, $customMessages);
+
+        $deskripsi_opening = ModelsLevel2::first();
+
+        if (isset($deskripsi_opening)) {
+            $deskripsi_opening->update([
+                'text' => $this->deskripsi_opening,
+            ]);
+        }else{
+            ModelsLevel2::create([
+                'text' => $this->deskripsi_opening,
+            ]);
+        }
+
+        $this->reset('deskripsi_opening');
+
+        $this->alert('success', 'Deskripsi Opening Berhasil Diubah', [
+            'position' => 'center',
+            'toast' => false,
+        ]);
+
+        $this->modalOpening = false;
+    }
 
     public function render()
     {
         $this->waktu_level2 = ModelsLevel2::value('waktu_level2');
+        $this->deskripsi_opening = ModelsLevel2::value('text');
         $this->data = SoalLevel2::select('id', 'question_text', 'question_image', 'correct_answer')->get();
         return view('livewire.guru.level2')->extends('layouts.guru.app');
     }

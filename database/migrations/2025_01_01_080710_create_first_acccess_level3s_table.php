@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('role_name');
             $table->string('end_time');
             $table->foreign('box_id')->references('id')->on('box_level3')->onDelete('cascade');
+            $table->string('status')->default(false);
             $table->timestamps();
         });
     }

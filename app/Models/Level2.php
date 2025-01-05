@@ -10,5 +10,6 @@ class Level2 extends Model
 
     protected $fillable = [
         'waktu_level2',
+        'text',
     ];
 }

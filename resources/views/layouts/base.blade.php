@@ -10,7 +10,6 @@
         <title>{{ config('app.name') }}</title>
     @endif
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('favicon.ico') }}">
 
@@ -32,11 +31,6 @@
 
     <!-- Styling Leaderboard -->
     <style>
-        .bg-game-map {
-            background-image: url('{{ asset('img/game-map.png') }}');
-            background-size: cover;
-            background-position: center;
-        }
         @media (min-width: 320px) {
             #main {
                 width: 410px;

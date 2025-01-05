@@ -5,8 +5,13 @@ namespace App\Livewire\Guru;
 use App\Models\AnswerLevel1;
 use App\Models\AnswerLevel2;
 use App\Models\AnswerLevel3;
+use App\Models\AnswerLevel4;
+use App\Models\AnswerLevel5;
 use App\Models\FirstAcccessLevel1;
 use App\Models\FirstAcccessLevel2;
+use App\Models\FirstAcccessLevel3;
+use App\Models\FirstAccessLevel4;
+use App\Models\FirstAccessLevel5;
 use App\Models\Murid;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +22,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 class Respondent extends Component
 {
     use LivewireAlert;
-    public $datalevel1, $datalevel2, $datalevel3, $soal, $point_reason = [];
+    public $datalevel1, $datalevel2, $datalevel3, $datalevel4, $datalevel5, $soal, $point_reason = [];
     protected $listeners = ['confirmed' => 'resetJawaban'];
 
     public function mount()
@@ -40,6 +45,17 @@ class Respondent extends Component
             'soal_level3.question_image as soal_question_image')
             ->join('soal_level3', 'answer_level3.soal_level3_id', '=', 'soal_level3.id')
             ->get();
+        $this->datalevel4 = AnswerLevel4::select('answer_level4.*',
+            'soal_level4.question_text as soal_question_text',
+            'soal_level4.question_image as soal_question_image')
+            ->join('soal_level4', 'answer_level4.soal_level4_id', '=', 'soal_level4.id')
+            ->get();
+        $this->datalevel5 = AnswerLevel5::select('answer_level5.*',
+            'soal_level5.question_text as soal_question_text',
+            'soal_level5.question_image as soal_question_image')
+            ->join('soal_level5', 'answer_level5.soal_level5_id', '=', 'soal_level5.id')
+            ->get();
+
     }
 
     public function confirmReset()
@@ -72,6 +88,14 @@ class Respondent extends Component
         }
         AnswerLevel1::truncate();
         FirstAcccessLevel1::truncate();
+        AnswerLevel2::truncate();
+        FirstAcccessLevel2::truncate();
+        AnswerLevel3::truncate();
+        FirstAcccessLevel3::truncate();
+        AnswerLevel4::truncate();
+        FirstAccessLevel4::truncate();
+        AnswerLevel5::truncate();
+        FirstAccessLevel5::truncate();
         $this->alert('success', 'Berhasil Mereset Jawaban',
         [
             'timer' => 3000,
@@ -133,6 +157,66 @@ class Respondent extends Component
 
         $murid = Murid::where('id', $answer->murid_id)->first();
         $murid->score_level_2 += $this->point_reason[$number];
+        $murid->save();
+
+        $this->reset('point_reason');
+        $this->alert('success', 'Berhasil Menyimpan Nilai');
+        $this->mount();
+    }
+
+    public function simpanNilaiSoal3($id, $number)
+    {
+        $rules = [
+            'point_reason.*' => 'required|numeric|min:0|max:100',
+        ];
+
+        $messages = [
+            'point_reason.*.required' => 'Nilai harus diisi.',
+            'point_reason.*.numeric' => 'Nilai harus berupa angka.',
+            'point_reason.*.min' => 'Nilai minimal 0.',
+            'point_reason.*.max' => 'Nilai maksimal 100.',
+        ];
+
+        // Validasi input
+        $this->validate($rules, $messages);
+
+        $answer = AnswerLevel3::find($id);
+        $answer->point_reason = $this->point_reason[$number];
+        $answer->total_point += $this->point_reason[$number];
+        $answer->save();
+
+        $murid = Murid::where('id', $answer->murid_id)->first();
+        $murid->score_level_3 += $this->point_reason[$number];
+        $murid->save();
+
+        $this->reset('point_reason');
+        $this->alert('success', 'Berhasil Menyimpan Nilai');
+        $this->mount();
+    }
+
+    public function simpanNilaiSoal4($id, $number)
+    {
+        $rules = [
+            'point_reason.*' => 'required|numeric|min:0|max:100',
+        ];
+
+        $messages = [
+            'point_reason.*.required' => 'Nilai harus diisi.',
+            'point_reason.*.numeric' => 'Nilai harus berupa angka.',
+            'point_reason.*.min' => 'Nilai minimal 0.',
+            'point_reason.*.max' => 'Nilai maksimal 100.',
+        ];
+
+        // Validasi input
+        $this->validate($rules, $messages);
+
+        $answer = AnswerLevel4::find($id);
+        $answer->point_reason = $this->point_reason[$number];
+        $answer->total_point += $this->point_reason[$number];
+        $answer->save();
+
+        $murid = Murid::where('id', $answer->murid_id)->first();
+        $murid->score_level_4 += $this->point_reason[$number];
         $murid->save();
 
         $this->reset('point_reason');

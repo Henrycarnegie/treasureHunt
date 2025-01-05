@@ -19,11 +19,12 @@ class Level1 extends Component
     use LivewireAlert;
 
     public $countdown, $startTime, $endTime = null, $display = '00:00', $showModal = true;
-    public $data, $selectedAnswer = [], $answer_image = [], $soallevel1_id = [];
+    public $data, $selectedAnswer = [], $answer_image = [], $soallevel1_id = [], $isSubmitting = false, $deskripsi_opening;
 
     public function mount()
     {
         $this->data = SoalLevel1::all();
+        $this->deskripsi_opening = ModelsLevel1::value('text');
 
         $level1 = ModelsLevel1::first();
         $data = FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first();
@@ -51,24 +52,58 @@ class Level1 extends Component
 
     public function simpanJawaban()
     {
+        if ($this->isSubmitting) {
+            return;
+        }
+
+        $this->isSubmitting = true;
+
         $roleName = Auth::user()->getRoleNames()->first();
         $murid = Murid::where('users_id', Auth::id())->first();
+        $finish = FirstAcccessLevel1::where('role_name', Auth::user()->getRoleNames()->first())->first();
 
-        if ($murid) {
-            foreach ($this->soallevel1_id as $key => $id) {
-                $selectedAnswer = $this->selectedAnswer[$key] ?? null;
-                $uploadedImage = $this->answer_image[$key] ?? null;
+        if (!$finish || !$murid) {
+            $this->isSubmitting = false;
+            return;
+        }
 
-                $customFileName = null;
-                if ($uploadedImage instanceof TemporaryUploadedFile) {
-                    $customFileName = 'answer_soal_level1' . $roleName . '_' . $key . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
-                    $uploadedImage->storeAs('answer_soal_level1', $customFileName, 'public');
-                }
+        $finish->update([
+            'status' => true,
+        ]);
 
-                $correctAnswer = SoalLevel1::where('id', $id)->value('correct_answer');
-                $isCorrect = $selectedAnswer === $correctAnswer;
-                $pointAnswer = $isCorrect ? 50 : 0;
+        // Create a single array of answers to process
+        $answersToProcess = [];
+        foreach ($this->soallevel1_id as $key => $id) {
+            $answersToProcess[] = [
+                'id' => $id,
+                'answer' => $this->selectedAnswer[$key] ?? null,
+                'image' => $this->answer_image[$key] ?? null
+            ];
+        }
 
+        // Process each answer once
+        foreach ($answersToProcess as $answer) {
+            $selectedAnswer = $answer['answer'];
+            $uploadedImage = $answer['image'];
+            $id = $answer['id'];
+
+            $customFileName = null;
+            if ($uploadedImage instanceof TemporaryUploadedFile) {
+                $customFileName = 'answer_soal_level1' . $roleName . '_' . $id . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
+                $uploadedImage->storeAs('answer_soal_level1', $customFileName, 'public');
+            }
+
+            $correctAnswer = SoalLevel1::where('id', $id)->value('correct_answer');
+            $isCorrect = $selectedAnswer === $correctAnswer;
+            $pointAnswer = $isCorrect ? 50 : 0;
+
+            // Check if answer already exists
+            $existingAnswer = AnswerLevel1::where([
+                'murid_id' => $murid->id,
+                'soal_level1_id' => $id
+            ])->first();
+
+            if (!$existingAnswer) {
                 AnswerLevel1::create([
                     'murid_id' => $murid->id,
                     'soal_level1_id' => $id,
@@ -83,14 +118,15 @@ class Level1 extends Component
             }
         }
 
+        // Cleanup
         foreach ($this->answer_image as $file) {
             if ($file instanceof TemporaryUploadedFile) {
                 $file->delete();
             }
         }
 
-        $this->reset(['countdown', 'data', 'selectedAnswer', 'answer_image']);
-        return redirect()->route('murid.home');
+        $this->reset(['countdown', 'selectedAnswer', 'answer_image', 'isSubmitting']);
+        return redirect()->route('murid.leaderboard');
     }
 
     public function countdownFinished()

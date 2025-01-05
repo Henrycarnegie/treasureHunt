@@ -16,7 +16,7 @@ class Level3 extends Component
     use LivewireAlert;
 
     public $waktu_level3, $data, $tambahSoalOpen = false, $id;
-    public $question_text, $question_image, $level_time;
+    public $question_text, $question_image, $level_time, $deskripsi_opening, $modalOpening = false;
     protected $listeners = ['deleteConfirmed' => 'handleConfirm'];
 
     public function simpanWaktuLevel()
@@ -138,9 +138,46 @@ class Level3 extends Component
         }
     }
 
+    public function simpanOpening()
+    {
+        $rules = [
+            'deskripsi_opening' => 'required|min:3|max:255',
+        ];
+
+        $customMessages = [
+            'deskripsi_opening.required' => 'Deskripsi opening harus diisi.',
+            'deskripsi_opening.min' => 'Deskripsi opening harus minimal 3 karakter.',
+            'deskripsi_opening.max' => 'Deskripsi opening tidak boleh lebih dari 255 karakter.',
+        ];
+
+        $this->validate($rules, $customMessages);
+
+        $deskripsi_opening = ModelsLevel3::first();
+
+        if (isset($deskripsi_opening)) {
+            $deskripsi_opening->update([
+                'text' => $this->deskripsi_opening,
+            ]);
+        }else{
+            ModelsLevel3::create([
+                'text' => $this->deskripsi_opening,
+            ]);
+        }
+
+        $this->reset('deskripsi_opening');
+
+        $this->alert('success', 'Deskripsi Opening Berhasil Diubah', [
+            'position' => 'center',
+            'toast' => false,
+        ]);
+
+        $this->modalOpening = false;
+    }
+
     public function render()
     {
         $this->data = BoxLevel3::with('soalLevel3')->get();
+        $this->deskripsi_opening = ModelsLevel3::value('text');
         $this->waktu_level3 = ModelsLevel3::value('waktu_level3');
         return view('livewire.guru.level3')->extends('layouts.guru.app');
     }

@@ -18,7 +18,7 @@ class ShowSoalLevel3 extends Component
     use WithFileUploads;
     use LivewireAlert;
 
-    public $countdown, $startTime, $endTime = null, $display = '00:00', $showModal = true;
+    public $countdown, $startTime, $endTime = null, $display = '00:00';
     public $data, $answer_image = [], $soallevel3_id = [];
 
     public function mount($boxId)
@@ -39,22 +39,14 @@ class ShowSoalLevel3 extends Component
         $this->countdown = $level3 ? $level3->waktu_level3 : 0;
     }
 
-    // public function startGame($endTime)
-    // {
-    //     $existingAccess = FirstAcccesslevel3::where('role_name', Auth::user()->getRoleNames()->first())->first();
-    //     if (!$existingAccess) {
-    //         FirstAcccesslevel3::create([
-    //             'role_name' => Auth::user()->getRoleNames()->first(),
-    //             'end_time' => $endTime,
-    //         ]);
-    //     }
-    //     $this->endTime = $endTime;
-    // }
-
     public function simpanJawaban()
     {
         $roleName = Auth::user()->getRoleNames()->first();
         $murid = Murid::where('users_id', Auth::id())->first();
+        $finish = FirstAcccessLevel3::where('role_name', Auth::user()->getRoleNames()->first())->first();
+        $finish->update([
+            'status' => true,
+        ]);
 
         if ($murid) {
             foreach ($this->soallevel3_id as $key => $id) {

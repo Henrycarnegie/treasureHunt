@@ -11,5 +11,6 @@ class FirstAcccessLevel2 extends Model
     protected $fillable = [
         'role_name',
         'end_time',
+        'status',
     ];
 }

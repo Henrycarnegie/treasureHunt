@@ -1,4 +1,4 @@
-@props(['responseType', 'pekerjaan', 'type_question', 'fullOption', 'boxId'])
+@props(['responseType', 'pekerjaan', 'type_question', 'fullOption', 'boxId', 'ikanId', 'infoLevel'])
 
 <div x-show="tambahSoalOpen" x-transition.opacity x-cloak @click="tambahSoalOpen = false"
     class="fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 backdrop-blur-sm transition-opacity duration-300">
@@ -15,7 +15,7 @@
                 <div class="w-full flex justify-end">
                     <x-icon icon="iconClose" @click="tambahSoalOpen = false"></x-icon>
                 </div>
-                <x-guru.field-tambah-soal :responseType="$responseType" :fullOption="$fullOption" box_id="{{ $boxId ?? null }}"></x-guru.field-tambah-soal>
+                <x-guru.field-tambah-soal :responseType="$responseType" :fullOption="$fullOption" infoLevel="{{ $infoLevel ?? null }}" box_id="{{ $boxId ?? null }}"></x-guru.field-tambah-soal>
             </div>
 
             <!-- Simpan Soal Button -->

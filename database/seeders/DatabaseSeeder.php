@@ -17,6 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call([RoleSeeder::class,]);
         $this->call([UserSeeder::class,]);
         $this->call([boxLevel3Seeder::class,]);
-        // $this->call([Soal1Seeder::class,]);
+        $this->call([Soal::class,]);
     }
 }

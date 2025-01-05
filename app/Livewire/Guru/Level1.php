@@ -15,7 +15,7 @@ class Level1 extends Component
     use LivewireAlert;
 
     public $waktu_level1, $data, $tambahSoalOpen = false, $id;
-    public $role_name, $type_question, $question_text, $question_image, $answer_a, $answer_b, $correct_answer, $level_time;
+    public $role_name, $type_question, $question_text, $question_image, $answer_a, $answer_b, $correct_answer, $level_time, $deskripsi_opening, $modalOpening = false;
     protected $listeners = ['deleteConfirmed' => 'handleConfirm'];
 
     public function setValue($role_name, $type_question){
@@ -167,9 +167,46 @@ class Level1 extends Component
         }
     }
 
+    public function simpanOpening()
+    {
+        $rules = [
+            'deskripsi_opening' => 'required|min:3|max:255',
+        ];
+
+        $customMessages = [
+            'deskripsi_opening.required' => 'Deskripsi opening harus diisi.',
+            'deskripsi_opening.min' => 'Deskripsi opening harus minimal 3 karakter.',
+            'deskripsi_opening.max' => 'Deskripsi opening tidak boleh lebih dari 255 karakter.',
+        ];
+
+        $this->validate($rules, $customMessages);
+
+        $deskripsi_opening = ModelsLevel1::first();
+
+        if (isset($deskripsi_opening)) {
+            $deskripsi_opening->update([
+                'text' => $this->deskripsi_opening,
+            ]);
+        }else{
+            ModelsLevel1::create([
+                'text' => $this->deskripsi_opening,
+            ]);
+        }
+
+        $this->reset('deskripsi_opening');
+
+        $this->alert('success', 'Deskripsi Opening Berhasil Diubah', [
+            'position' => 'center',
+            'toast' => false,
+        ]);
+
+        $this->modalOpening = false;
+    }
+
     public function render()
     {
         $this->waktu_level1 = ModelsLevel1::value('waktu_level1');
+        $this->deskripsi_opening = ModelsLevel1::value('text');
         $this->data = SoalLevel1::select('id', 'role_name', 'type_question', 'question_text', 'question_image', 'correct_answer')->get();
         return view('livewire.guru.level1')->extends('layouts.guru.app');
     }

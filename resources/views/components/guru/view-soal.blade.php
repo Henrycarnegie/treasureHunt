@@ -2,7 +2,7 @@
      class="grid grid-flow-row gap-3 border-2 border-gray-400 p-4 rounded-md text-white w-full">
     {{-- Header Soal --}}
     <div class="flex" @click="viewSoalOpen = !viewSoalOpen">
-        <span class="text-amber-500 font-semibold">Soal {{ $iteration }}</span>
+        <span class="text-amber-500 font-semibold">Soal {{ $iteration }} <span class="text-green-500"> {{ ($infoLevel == '4') ? '('. $question->type.')'  : '' }} </span></span>
     </div>
 
     {{-- Pertanyaan dan Jawaban --}}
@@ -18,7 +18,7 @@
                 class="h-48 w-auto"
             >
         </div>
-        @if ($infoLevel != '3')
+        @if ($infoLevel != '3' && $infoLevel != '4')
             <span>Jawaban: {{ $question->correct_answer }}</span>
         @endif
     </div>

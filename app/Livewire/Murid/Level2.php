@@ -19,12 +19,13 @@ class Level2 extends Component
     use LivewireAlert;
 
     public $countdown, $startTime, $endTime = null, $display = '00:00', $showModal = true;
-    public $data, $selectedAnswer = [], $answer_image = [], $soallevel2_id = [];
+    public $data, $selectedAnswer = [], $answer_image = [], $soallevel2_id = [], $isSubmitting = false, $deskripsi_opening;
 
     public function mount()
     {
         $this->data = SoalLevel2::all();
 
+        $this->deskripsi_opening = ModelsLevel2::value('text');
         $level2 = ModelsLevel2::first();
         $data = FirstAcccessLevel2::where('role_name', Auth::user()->getRoleNames()->first())->first();
 
@@ -51,24 +52,72 @@ class Level2 extends Component
 
     public function simpanJawaban()
     {
+        if ($this->isSubmitting) {
+            return;
+        }
+
+        $this->isSubmitting = true;
+
         $roleName = Auth::user()->getRoleNames()->first();
         $murid = Murid::where('users_id', Auth::id())->first();
+        $finish = FirstAcccessLevel2::where('role_name', Auth::user()->getRoleNames()->first())->first();
 
-        if ($murid) {
-            foreach ($this->soallevel2_id as $key => $id) {
-                $selectedAnswer = $this->selectedAnswer[$key] ?? null;
-                $uploadedImage = $this->answer_image[$key] ?? null;
+        $totalAnswerPerUser = SoalLevel2::count();
+        $totalAnswer = AnswerLevel2::count();
 
-                $customFileName = null;
-                if ($uploadedImage instanceof TemporaryUploadedFile) {
-                    $customFileName = 'answer_soal_level2' . $roleName . '_' . $key . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
-                    $uploadedImage->storeAs('answer_soal_level2', $customFileName, 'public');
+        if (!$finish || !$murid) {
+            $this->isSubmitting = false;
+            return;
+        }
+
+        $finish->update([
+            'status' => true,
+        ]);
+
+        // Create a single array of answers to process
+        $answersToProcess = [];
+        foreach ($this->soallevel2_id as $key => $id) {
+            $answersToProcess[] = [
+                'id' => $id,
+                'answer' => $this->selectedAnswer[$key] ?? null,
+                'image' => $this->answer_image[$key] ?? null
+            ];
+        }
+
+        // Process each answer once
+        foreach ($answersToProcess as $answer) {
+            $selectedAnswer = $answer['answer'];
+            $uploadedImage = $answer['image'];
+            $id = $answer['id'];
+
+            $customFileName = null;
+            if ($uploadedImage instanceof TemporaryUploadedFile) {
+                $customFileName = 'answer_soal_levle2' . $roleName . '_' . $id . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
+                $uploadedImage->storeAs('answer_soal_levle2', $customFileName, 'public');
+            }
+
+            $correctAnswer = SoalLevel2::where('id', $id)->value('correct_answer');
+            $isCorrect = $selectedAnswer === $correctAnswer;
+            $pointAnswer = $isCorrect ? 50 : 0;
+            if ($totalAnswer >= $totalAnswerPerUser ) {
+                if ($totalAnswer == $totalAnswerPerUser ) {
+                    $pointAnswer += 20;
+                } elseif ($totalAnswer == $totalAnswerPerUser  * 2) {
+                    $pointAnswer += 15;
+                } elseif ($totalAnswer == $totalAnswerPerUser  * 3) {
+                    $pointAnswer += 10;
                 }
+            }else {
+                $pointAnswer += 25;
+            }
 
-                $correctAnswer = SoalLevel2::where('id', $id)->value('correct_answer');
-                $isCorrect = $selectedAnswer === $correctAnswer;
-                $pointAnswer = $isCorrect ? 50 : 0;
+            // Check if answer already exists
+            $existingAnswer = AnswerLevel2::where([
+                'murid_id' => $murid->id,
+                'soal_level2_id' => $id
+            ])->first();
 
+            if (!$existingAnswer) {
                 AnswerLevel2::create([
                     'murid_id' => $murid->id,
                     'soal_level2_id' => $id,
@@ -83,14 +132,15 @@ class Level2 extends Component
             }
         }
 
+        // Cleanup
         foreach ($this->answer_image as $file) {
             if ($file instanceof TemporaryUploadedFile) {
                 $file->delete();
             }
         }
 
-        $this->reset(['countdown', 'data', 'selectedAnswer', 'answer_image']);
-        return redirect()->route('murid.home');
+        $this->reset(['countdown', 'selectedAnswer', 'answer_image', 'isSubmitting']);
+        return redirect()->route('murid.leaderboard');
     }
 
     public function countdownFinished()

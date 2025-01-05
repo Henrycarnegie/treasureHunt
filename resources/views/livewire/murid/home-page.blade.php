@@ -24,13 +24,13 @@
                 class="absolute w-12 md:w-24 lg:w-40 top-[30%] left-[15%] md:top-[25%] md:left-[11%] lg:top-[25%] lg:left-[11%] xl:top-[27%] xl:left-[15%]">
         </a>
 
-        <a href="{{ route('murid.level3') }}">
+        <a wire:click="cekAksesLevel3" class="cursor-pointer">
             {{-- Level 3 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-3"
                 class="absolute w-12 md:w-24 lg:w-40 top-[48%] right-[17%] md:top-[41%] md:right-[13%] lg:top-[42%] lg:right-[14%] xl:top-[43%] xl:right-[18%]">
         </a>
 
-        <a href="{{ route('murid.level4') }}">
+        <a wire:click="cekAksesLevel4" class="cursor-pointer">
             {{-- Level 4 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-4"
                 class="absolute w-12 md:w-24 lg:w-40 bottom-[23%] left-[20%] md:bottom-[35%] md:left-[18%] lg:top-[61%] lg:left-[20%] xl:top-[65%] xl:left-[22%]">

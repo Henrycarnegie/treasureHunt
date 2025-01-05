@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('level3', function (Blueprint $table) {
             $table->id();
             $table->integer('waktu_level3');
+            $table->text('text')->nullable();
             $table->timestamps();
         });
     }

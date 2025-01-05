@@ -12,7 +12,7 @@
                     <x-guru.view-soal :question="$dataItem" :iteration="$loop->iteration" infoLevel="{{ $infoLevel }}"></x-guru.view-soal>
 
                     <!-- Tombol Hapus Soal -->
-                    <button wire:click="confirmDelete('{{ $dataItem->id }}')" type="button" class="col-end-auto">
+                    <button wire:click="confirmDelete('{{ $dataItem->id }}')" type="button" class="col-end-auto">   
                         <x-icon icon="iconDelete"></x-icon>
                     </button>
                 </div>
@@ -65,7 +65,8 @@
         pekerjaan="{{ $pekerjaan ?? '' }}"
         type_question="{{ $type_question ?? '' }}"
         :fullOption="$fullOption"
-        boxId="{{ $boxId ?? null }}">
+        boxId="{{ $boxId ?? null }}"
+        infoLevel="{{ $infoLevel ?? null }}">
     </x-guru.tambah-soal>
 
 </div>

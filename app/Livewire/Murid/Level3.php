@@ -13,7 +13,19 @@ class Level3 extends Component
 {
     use LivewireAlert;
 
-    public $showModal = true, $data, $countdown;
+    public $showModal = true, $data, $countdown, $deskripsi_opening;
+
+    public function mount()
+    {
+        $check = FirstAcccessLevel3::where('role_name', Auth::user()->getRoleNames()->first())
+            ->first();
+        $this->deskripsi_opening = ModelsLevel3::value('text');
+
+        if ($check) {
+            return redirect()->route('murid.ShowSoalLevel3', ['boxId' => $check->box_id]);
+        }
+
+    }
 
     public function selectBox($boxId)
     {
@@ -39,8 +51,16 @@ class Level3 extends Component
 
     public function render()
     {
-        $this->data = BoxLevel3::all();
+        $boxes = BoxLevel3::all();
 
-        return view('livewire.murid.level3')->extends('layouts.app');
+
+        $this->data = $boxes->map(function ($box) {
+            $isUsed = FirstAcccessLevel3::where('box_id', $box->id)
+                ->exists();
+            $box->using = $isUsed;
+            return $box;
+        });
+
+    return view('livewire.murid.level3')->extends('layouts.app');
     }
 }

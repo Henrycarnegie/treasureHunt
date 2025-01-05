@@ -9,7 +9,6 @@
             <title>{{ config('app.name') }}</title>
         @endif
 
-        {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('favicon.ico') }}">
 

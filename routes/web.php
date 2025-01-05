@@ -23,6 +23,7 @@ use App\Livewire\Murid\Level3 as MuridLevel3;
 use App\Livewire\Murid\Level4 as MuridLevel4;
 use App\Livewire\Murid\Level5 as MuridLevel5;
 use App\Livewire\Murid\ShowSoalLevel3;
+use App\Livewire\Murid\ShowSoalLevel4;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function () {
 
         Route::get('level4', MuridLevel4::class)
         ->name('level4');
+
+        Route::get('show-soal-level4/{soalId}', ShowSoalLevel4::class)
+        ->name('ShowSoalLevel4');
 
         Route::get('level5', MuridLevel5::class)
         ->name('level5');

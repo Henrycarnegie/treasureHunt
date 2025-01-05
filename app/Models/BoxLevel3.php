@@ -10,7 +10,6 @@ class BoxLevel3 extends Model
 
     protected $fillable = [
         'nama_box',
-        'status',
     ];
 
     public function soalLevel3()

@@ -32,10 +32,7 @@ class="overflow-hidden min-h-screen flex flex-col gap-8 lg:gap-12 xl:gap-20 item
                 <!-- Content -->
                 <div class="mb-6">
                     <h1>
-                        Siapkan semua alat tulis dan kertas! Tidak diperbolehkan menggunakan
-                        <span class="text-red-500 font-semibold">kalkulator</span>
-                        atau
-                        <span class="text-red-500 font-semibold">ChatGPT</span>
+                        {{ $deskripsi_opening }}
                     </h1>
                 </div>
 
@@ -52,13 +49,17 @@ class="overflow-hidden min-h-screen flex flex-col gap-8 lg:gap-12 xl:gap-20 item
     </div>
 
     <div class="bg-white rounded-md bg-clip-padding backdrop-filter backdrop-blur-md border-gray-200 shadow-lg px-8 py-6 min-w-full min-h-80">
-        <div class="flex w-full">
+        <div class="flex w-full" wire:poll>
             @foreach ( $data as $item)
                 <div class="w-full flex flex-col gap-y-3 justify-center items-center">
                     <span class="md:text-2xl font-bold text-orange-600 cursor-default">Box {{ $loop->iteration }}</span>
-                    <img src="{{ asset('img/Chest.svg') }}" alt="box-1" class="h-40 cursor-pointer transform transition-transform duration-300 hover:scale-110 p-2" wire:click="selectBox({{ $item->id }})">
+                    @if ($item->using == true)
+                        <img src="{{ asset('img/chestUsed.svg') }}" alt="box-1" class="h-40 cursor-not-allowed transform transition-transform duration-300 hover:scale-110 p-2">
+                    @else
+                        <img src="{{ asset('img/Chest.svg') }}" alt="box-1" class="h-40 cursor-pointer transform transition-transform duration-300 hover:scale-110 p-2" wire:click="selectBox({{ $item->id }})">
+                    @endif
                 </div>
-            @endforeach
+                @endforeach
         </div>
     </div>
 </div>

@@ -12,5 +12,6 @@ class FirstAcccessLevel3 extends Model
         'box_id',
         'role_name',
         'end_time',
+        'status',
     ];
 }
