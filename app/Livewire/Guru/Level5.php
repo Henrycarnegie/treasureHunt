@@ -39,10 +39,9 @@ class Level5 extends Component
             ]);
         }
 
-
         $this->reset('nyawa');
 
-        $this->alert('success', 'Waktu Level Berhasil Diubah', [
+        $this->alert('success', 'Nyawa Berhasil Diubah', [
             'position' => 'center',
             'toast' => false,
         ]);
