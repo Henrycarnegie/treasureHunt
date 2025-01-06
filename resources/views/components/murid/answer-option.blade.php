@@ -11,7 +11,7 @@
         </div>
     </label>
 @else
-    <div class="relative cursor-pointer flex justify-center bg-gray-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-700 text-amber-400 hover:bg-amber-200 hover:text-slate-800 shadow-lg px-4 py-6 text-lg font-bold transition-all" wire:click="selectAnswer({{ $id_option }}, {{ $value }})">
+    <div class="relative cursor-pointer flex justify-center bg-gray-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 border-gray-700 text-amber-400 hover:bg-amber-200 hover:text-slate-800 shadow-lg px-4 py-6 text-lg font-bold transition-all" wire:click="selectAnswer({{ $id_option }}, '{{ $value }})'">
         {{ $slot }}
     </div>
 @endif
