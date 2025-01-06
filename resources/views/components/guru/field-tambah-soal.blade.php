@@ -16,8 +16,7 @@
     </div>
     <div class="w-full max-w-sm min-w-[200px]">
         <label for="question_image" class="block mb-2 text-sm text-slate-600">Gambar Pertanyaan</label>
-        <input type="file" wire:model="question_image" id="question_image"
-            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow file:bg-indigo-500 file:text-white file:px-3 file:py-1" />
+        <input type="file" wire:model="question_image" id="question_image" class="filepond" />
         @error('question_image')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -148,3 +147,24 @@
         @enderror
     </div>
 @endif
+
+<script>
+    // Pastikan FilePond sudah di-load sebelumnya
+    document.addEventListener('DOMContentLoaded', function () {
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+
+        FilePond.create(document.querySelector('.filepond'), {
+            imagePreviewHeight: 150,
+            imagePreviewMaxFileSize: '5MB',
+            allowImagePreview: true,
+            allowMultiple: false,
+            imageCropAspectRatio: '1:1',
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            server: {
+                process: '/your-upload-endpoint',
+                revert: '/your-revert-endpoint',
+            }
+        });
+    });
+ </script>
