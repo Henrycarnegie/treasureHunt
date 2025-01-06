@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('box_id');
             $table->text('question_text');
-            $table->string('question_image');
+            $table->string('question_image')->nullable(true);
             $table->foreign('box_id')->references('id')->on('box_level3')->onDelete('cascade');
             $table->timestamps();
         });
