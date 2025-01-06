@@ -52,7 +52,7 @@ class Level5 extends Component
         // dd($this->question_text);
         $rules = [
             'question_text' => 'required|min:3',
-            'question_image' => 'nullable|file|image|max:1024',
+            'question_image' => 'nullable|file|image|max:10240',
             'answer_a' => 'required|min:1',
             'answer_b' => 'required|min:1',
             'answer_c' => 'required|min:1',

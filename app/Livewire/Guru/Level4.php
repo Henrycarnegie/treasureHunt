@@ -51,7 +51,7 @@ class Level4 extends Component
         $rules = [
             'type' => 'required',
             'question_text' => 'required|min:3',
-            'question_image' => 'nullable|file|image|max:1024',
+            'question_image' => 'nullable|file|image|max:10240',
         ];
 
         $customMessages = [
