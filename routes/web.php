@@ -41,6 +41,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/', Login::class)
     ->name('login');
 
+    Route::get('/info', function () {
+        return phpinfo();
+    });
+
 });
 
 Route::middleware('auth')->group(function () {
