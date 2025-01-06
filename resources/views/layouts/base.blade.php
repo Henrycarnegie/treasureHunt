@@ -25,14 +25,6 @@
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
     @livewireScripts
-    <!-- FilePond Core -->
-    <link href="https://cdn.jsdelivr.net/npm/filepond@4.30.4/dist/filepond.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/filepond@4.30.4/dist/filepond.min.js"></script>
-
-    <!-- FilePond Image Preview Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4.0.3/dist/filepond-plugin-image-preview.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4.0.3/dist/filepond-plugin-image-preview.min.css" rel="stylesheet">
-
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
