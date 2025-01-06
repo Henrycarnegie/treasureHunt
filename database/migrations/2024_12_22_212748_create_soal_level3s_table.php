@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('soal_level3', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('box_id');
-            $table->string('question_text');
+            $table->text('question_text');
             $table->string('question_image');
             $table->foreign('box_id')->references('id')->on('box_level3')->onDelete('cascade');
             $table->timestamps();

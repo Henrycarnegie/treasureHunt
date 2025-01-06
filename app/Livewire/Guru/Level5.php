@@ -51,33 +51,28 @@ class Level5 extends Component
     {
         // dd($this->question_text);
         $rules = [
-            'question_text' => 'required|min:3|max:255',
+            'question_text' => 'required|min:3',
             'question_image' => 'nullable|file|image|max:1024',
-            'answer_a' => 'required|min:1|max:255',
-            'answer_b' => 'required|min:1|max:255',
-            'answer_c' => 'required|min:1|max:255',
-            'answer_c' => 'required|min:1|max:255',
+            'answer_a' => 'required|min:1',
+            'answer_b' => 'required|min:1',
+            'answer_c' => 'required|min:1',
+            'answer_c' => 'required|min:1',
             'correct_answer' => 'required',
         ];
 
         $customMessages = [
             'question_text.required' => 'Teks pertanyaan harus diisi.',
             'question_text.min' => 'Teks pertanyaan harus minimal 3 karakter.',
-            'question_text.max' => 'Teks pertanyaan tidak boleh lebih dari 255 karakter.',
             'question_image.image' => 'File yang diunggah harus berupa gambar.',
             'question_image.max' => 'Ukuran gambar tidak boleh lebih dari 1MB.',
             'answer_a.required' => 'Jawaban A harus diisi.',
             'answer_a.min' => 'Jawaban A harus minimal 3 karakter.',
-            'answer_a.max' => 'Jawaban A tidak boleh lebih dari 255 karakter.',
             'answer_b.required' => 'Jawaban B harus diisi.',
             'answer_b.min' => 'Jawaban B harus minimal 3 karakter.',
-            'answer_b.max' => 'Jawaban B tidak boleh lebih dari 255 karakter.',
             'answer_c.required' => 'Jawaban C harus diisi.',
             'answer_c.min' => 'Jawaban C harus minimal 3 karakter.',
-            'answer_c.max' => 'Jawaban C tidak boleh lebih dari 255 karakter.',
             'answer_d.required' => 'Jawaban D harus diisi.',
             'answer_d.min' => 'Jawaban D harus minimal 3 karakter.',
-            'answer_d.max' => 'Jawaban D tidak boleh lebih dari 255 karakter.',
             'correct_answer.required' => 'Jawaban benar harus diisi.',
         ];
 
@@ -180,13 +175,12 @@ class Level5 extends Component
     public function simpanOpening()
     {
         $rules = [
-            'deskripsi_opening' => 'required|min:3|max:255',
+            'deskripsi_opening' => 'required|min:3',
         ];
 
         $customMessages = [
             'deskripsi_opening.required' => 'Deskripsi opening harus diisi.',
             'deskripsi_opening.min' => 'Deskripsi opening harus minimal 3 karakter.',
-            'deskripsi_opening.max' => 'Deskripsi opening tidak boleh lebih dari 255 karakter.',
         ];
 
         $this->validate($rules, $customMessages);

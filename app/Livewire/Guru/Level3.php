@@ -50,14 +50,13 @@ class Level3 extends Component
 
     public function simpanSoal($boxId){
         $rules = [
-            'question_text' => 'required|min:3|max:255',
+            'question_text' => 'required|min:3',
             'question_image' => 'nullable|file|image|max:1024',
         ];
 
         $customMessages = [
             'question_text.required' => 'Teks pertanyaan harus diisi.',
             'question_text.min' => 'Teks pertanyaan harus minimal 3 karakter.',
-            'question_text.max' => 'Teks pertanyaan tidak boleh lebih dari 255 karakter.',
             'question_image.image' => 'File yang diunggah harus berupa gambar.',
             'question_image.max' => 'Ukuran gambar tidak boleh lebih dari 1MB.',
         ];
@@ -141,13 +140,12 @@ class Level3 extends Component
     public function simpanOpening()
     {
         $rules = [
-            'deskripsi_opening' => 'required|min:3|max:255',
+            'deskripsi_opening' => 'required|min:3',
         ];
 
         $customMessages = [
             'deskripsi_opening.required' => 'Deskripsi opening harus diisi.',
             'deskripsi_opening.min' => 'Deskripsi opening harus minimal 3 karakter.',
-            'deskripsi_opening.max' => 'Deskripsi opening tidak boleh lebih dari 255 karakter.',
         ];
 
         $this->validate($rules, $customMessages);

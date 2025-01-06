@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('soal_level4', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('question_text');
+            $table->text('question_text');
             $table->string('question_image');
             $table->timestamps();
         });

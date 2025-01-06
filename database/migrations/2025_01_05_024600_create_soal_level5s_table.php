@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('soal_level5', function (Blueprint $table) {
             $table->id();
-            $table->string('question_text');
+            $table->text('question_text');
             $table->string('question_image')->nullable(true);
             $table->string('answer_a');
             $table->string('answer_b');
