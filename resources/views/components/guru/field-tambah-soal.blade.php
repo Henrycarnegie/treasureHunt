@@ -15,9 +15,9 @@
         @enderror
     </div>
     <div class="w-full max-w-sm min-w-[200px]">
-        <label for="question_image" class="block mb-2 text-sm text-slate-600">Gambar Pertanyaan</label>
-        <input type="file" id="filepond" wire:model="question_image">
-
+        <label class="block mb-2 text-sm text-slate-600">Gambar Pertanyaan </label>
+        <input type="file" wire:model="question_image"
+            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow file:bg-indigo-500 file:text-white file:px-3 file:py-1" />
         @error('question_image')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
