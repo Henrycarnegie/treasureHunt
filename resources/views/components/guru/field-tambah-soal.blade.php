@@ -16,8 +16,8 @@
     </div>
     <div class="w-full max-w-sm min-w-[200px]">
         <label for="question_image" class="block mb-2 text-sm text-slate-600">Gambar Pertanyaan</label>
-        <input type="file" wire:model="question_image" id="question_image"
-            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow file:bg-indigo-500 file:text-white file:px-3 file:py-1" />
+        {{-- <input type="file" wire:model="question_image" class="filepond" /> --}}
+        <x-filepond::upload wire:model="question_image" />
         @error('question_image')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
@@ -148,3 +148,37 @@
         @enderror
     </div>
 @endif
+
+<script>
+document.addEventListener('livewire:load', function () {
+    // Register plugins
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+        FilePondPluginImageExifOrientation,
+        FilePondPluginFileValidateType
+    );
+
+    const inputElement = document.querySelector('#filepond');
+    const pond = FilePond.create(inputElement, {
+        allowMultiple: false,
+        acceptedFileTypes: ['image/*'],
+        imagePreviewHeight: 170,
+        imageCropAspectRatio: '1:1',
+        imageResizeTargetWidth: 200,
+        imageResizeTargetHeight: 200,
+        stylePanelLayout: 'compact circle',
+        styleLoadIndicatorPosition: 'center bottom',
+        styleProgressIndicatorPosition: 'right bottom',
+        styleButtonRemoveItemPosition: 'left bottom',
+        styleButtonProcessItemPosition: 'right bottom',
+        server: {
+            process: (fieldName, file, metadata, load, error, progress, abort) => {
+                @this.upload('question_image', file, load, error, progress);
+            },
+            revert: (filename, load) => {
+                @this.removeUpload('question_image', filename, load);
+            }
+        }
+    });
+});
+</script>

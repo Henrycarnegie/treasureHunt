@@ -23,6 +23,7 @@
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
         @livewireStyles
         @livewireScripts
+        @filepondScripts
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,5 +40,7 @@
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <x-livewire-alert::scripts />
+        <script src="https://cdn.jsdelivr.net/npm/filepond@4.30.4/dist/filepond.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/filepond-plugin-image-preview@4.0.3/dist/
     </body>
 </html>

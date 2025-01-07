@@ -4,9 +4,9 @@
     class="fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 backdrop-blur-sm transition-opacity duration-300">
     <div class="relative mx-auto w-full max-w-[24rem] rounded-lg overflow-hidden shadow-sm bg-white" @click.stop>
         @if ($boxId)
-            <form wire:submit.prevent="simpanSoal({{ $boxId }})">
+            <form wire:submit.prevent="simpanSoal({{ $boxId }})" enctype="multipart/form-data">
         @else
-            <form wire:submit.prevent="simpanSoal">
+            <form wire:submit.prevent="simpanSoal" enctype="multipart/form-data">
         @endif
             {{-- Modal Input --}}
             <div class="flex flex-col gap-4 p-6">

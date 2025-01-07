@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Spatie\LivewireFilepond\WithFilePond;
 
 class Level1 extends Component
 {
     use WithFileUploads;
     use LivewireAlert;
+    use WithFilePond;
 
     public $waktu_level1, $data, $tambahSoalOpen = false, $id;
     public $role_name, $type_question, $question_text, $question_image, $answer_a, $answer_b, $correct_answer, $level_time, $deskripsi_opening, $modalOpening = false;
