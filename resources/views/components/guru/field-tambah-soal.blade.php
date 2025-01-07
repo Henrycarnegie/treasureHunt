@@ -148,37 +148,3 @@
         @enderror
     </div>
 @endif
-
-<script>
-document.addEventListener('livewire:load', function () {
-    // Register plugins
-    FilePond.registerPlugin(
-        FilePondPluginImagePreview,
-        FilePondPluginImageExifOrientation,
-        FilePondPluginFileValidateType
-    );
-
-    const inputElement = document.querySelector('#filepond');
-    const pond = FilePond.create(inputElement, {
-        allowMultiple: false,
-        acceptedFileTypes: ['image/*'],
-        imagePreviewHeight: 170,
-        imageCropAspectRatio: '1:1',
-        imageResizeTargetWidth: 200,
-        imageResizeTargetHeight: 200,
-        stylePanelLayout: 'compact circle',
-        styleLoadIndicatorPosition: 'center bottom',
-        styleProgressIndicatorPosition: 'right bottom',
-        styleButtonRemoveItemPosition: 'left bottom',
-        styleButtonProcessItemPosition: 'right bottom',
-        server: {
-            process: (fieldName, file, metadata, load, error, progress, abort) => {
-                @this.upload('question_image', file, load, error, progress);
-            },
-            revert: (filename, load) => {
-                @this.removeUpload('question_image', filename, load);
-            }
-        }
-    });
-});
-</script>
