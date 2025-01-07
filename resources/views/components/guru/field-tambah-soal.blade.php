@@ -16,8 +16,8 @@
     </div>
     <div class="w-full max-w-sm min-w-[200px]">
         <label for="question_image" class="block mb-2 text-sm text-slate-600">Gambar Pertanyaan</label>
-        {{-- <input type="file" wire:model="question_image" class="filepond" /> --}}
-        <x-filepond::upload wire:model="question_image" />
+        <input type="file" id="filepond" wire:model="question_image">
+
         @error('question_image')
             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
         @enderror
