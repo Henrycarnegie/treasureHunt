@@ -56,7 +56,7 @@ class="overflow-hidden min-h-screen flex flex-col gap-8 lg:gap-12 xl:gap-20 item
                     @if ($item->using == true)
                         <img src="{{ asset('img/chestUsed.svg') }}" alt="box-1" class="h-40 cursor-not-allowed transform transition-transform duration-300 hover:scale-110 p-2">
                     @else
-                        <img src="{{ asset('img/Chest.svg') }}" alt="box-1" class="h-40 cursor-pointer transform transition-transform duration-300 hover:scale-110 p-2" wire:click="selectBox({{ $item->id }})">
+                        <img src="{{ asset('img/chest.svg') }}" alt="box-1" class="h-40 cursor-pointer transform transition-transform duration-300 hover:scale-110 p-2" wire:click="selectBox({{ $item->id }})">
                     @endif
                 </div>
                 @endforeach
