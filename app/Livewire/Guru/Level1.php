@@ -53,6 +53,7 @@ class Level1 extends Component
     }
 
     public function simpanSoal(){
+        dd($this->question_image);
         $rules = [
             'role_name' => 'required',
             'type_question' => 'required',
