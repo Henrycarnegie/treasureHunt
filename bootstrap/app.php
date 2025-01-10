@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Middleware\TrustCloudflareProxies;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Support\Facades\Http;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,23 +12,6 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-
-        $response = Http::get('https://api.cloudflare.com/client/v4/ips');
-
-        if ($response->successful()) {
-            $ipv4 = $response->json('result.ipv4_cidrs');
-            $ipv6 = $response->json('result.ipv6_cidrs');
-
-            // Gabungkan daftar IP
-            $allIps = array_merge($ipv4, $ipv6);
-
-            // Percayai hanya daftar IP dari Cloudflare
-            $middleware->trustProxies(at: $allIps);
-        } else {
-            // Tangani kesalahan jika API gagal
-            throw new Exception('Gagal mendapatkan daftar IP dari Cloudflare.');
-        }
-
         $middleware->alias([
             'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
             'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
@@ -36,6 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
+    })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->prepend(TrustCloudflareProxies::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
