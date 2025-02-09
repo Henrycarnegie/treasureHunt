@@ -36,7 +36,7 @@
                 class="absolute w-12 md:w-24 lg:w-40 bottom-[23%] left-[20%] md:bottom-[35%] md:left-[18%] lg:top-[61%] lg:left-[20%] xl:top-[65%] xl:left-[22%]">
         </a>
 
-        <a href="{{ route('murid.level5') }}">
+        <a wire:click="cekAksesLevel5" class="cursor-pointer">
             {{-- Level 5 --}}
             <img src="{{ asset('img/currentlevel.svg') }}" alt="stone-level-5"
                 class="absolute w-12 md:w-24 lg:w-40 bottom-[12%] right-[15%] md:bottom-[25%] md:right-[14%] lg:top-[72%] lg:right-[14%] xl:top-[75%] xl:right-[18%]">

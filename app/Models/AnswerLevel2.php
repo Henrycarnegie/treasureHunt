@@ -18,4 +18,9 @@ class AnswerLevel2 extends Model
         'point_reason',
         'total_point',
     ];
+
+    public function soalLevel2()
+    {
+        return $this->belongsTo(SoalLevel2::class, 'soal_level2_id');
+    }
 }

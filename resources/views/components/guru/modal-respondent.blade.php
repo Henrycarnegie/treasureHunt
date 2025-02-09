@@ -22,7 +22,7 @@
             <x-guru.respondent-level infoLevel="1">
                 @foreach ($level1->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response level="1" :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soal_question_text" :answer="$item->answer" :is_correct="$item->is_correct" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                        <x-guru.response level="1" :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soalLevel1->question_text" :answer="$item->answer" :is_correct="$item->is_correct" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>
@@ -31,7 +31,7 @@
             <x-guru.respondent-level infoLevel="2">
                 @foreach ($level2->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response level="2" :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soal_question_text" :answer="$item->answer" :is_correct="$item->is_correct" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                        <x-guru.response level="2" :number="$loop->iteration" responseType="pilganWithUpload" :question="$item->soalLevel2->question_text" :answer="$item->answer" :is_correct="$item->is_correct" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>
@@ -40,7 +40,7 @@
             <x-guru.respondent-level infoLevel="3">
                 @foreach ($level3->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response level="3" :number="$loop->iteration" responseType="upload" :question="$item->soal_question_text" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                        <x-guru.response level="3" :number="$loop->iteration" responseType="upload" :question="$item->soalLevel3->question_text" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>
@@ -49,7 +49,7 @@
             <x-guru.respondent-level infoLevel="4">
                 @foreach ($level4->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response level="4" :number="$loop->iteration" responseType="upload" :question="$item->soal_question_text" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
+                        <x-guru.response level="4" :number="$loop->iteration" responseType="upload" :question="$item->soalLevel4->question_text" :image_reason="$item->image_reason" :point_reason="$item->point_reason" id="{{ $item->id }}"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>
@@ -58,7 +58,7 @@
             <x-guru.respondent-level infoLevel="5">
                 @foreach ($level5->where('murid_id', $muridId) as $item)
                     <x-guru.respondent-soal infoSoal="{{ $loop->iteration }}">
-                        <x-guru.response level="5" :number="$loop->iteration" responseType="pilgan" :question="$item->soal_question_text" :answer="$item->answer" :is_correct="$item->is_correct"></x-guru.response>
+                        <x-guru.response level="5" :number="$loop->iteration" responseType="pilgan" :question="$item->soalLevel5->question_text" :answer="$item->answer" :is_correct="$item->is_correct"></x-guru.response>
                     </x-guru.respondent-soal>
                 @endforeach
             </x-guru.respondent-level>

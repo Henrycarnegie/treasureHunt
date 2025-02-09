@@ -96,16 +96,29 @@ class Respondent extends Component
     // Sederhanakan simpanNilaiSoal dengan parameterisasi
     public function simpanNilai($level, $id, $number)
     {
-        $rules = [
-            'point_reason.*' => 'required|numeric|min:0|max:100',
-        ];
+        if($level == 1 || $level == 2) {
+            $rules = [
+                'point_reason.*' => 'required|numeric|min:0|max:50',
+            ];
 
-        $messages = [
-            'point_reason.*.required' => 'Nilai harus diisi.',
-            'point_reason.*.numeric' => 'Nilai harus berupa angka.',
-            'point_reason.*.min' => 'Nilai minimal 0.',
-            'point_reason.*.max' => 'Nilai maksimal 100.',
-        ];
+            $messages = [
+                'point_reason.*.required' => 'Nilai harus diisi.',
+                'point_reason.*.numeric' => 'Nilai harus berupa angka.',
+                'point_reason.*.min' => 'Nilai minimal :min.',
+                'point_reason.*.max' => 'Nilai maksimal :max.',
+            ];
+        }elseif($level == 3 || $level == 4) {
+            $rules = [
+                'point_reason.*' => 'required|numeric|min:0|max:100',
+            ];
+            $messages = [
+                'point_reason.*.required' => 'Nilai harus diisi.',
+                'point_reason.*.numeric' => 'Nilai harus berupa angka.',
+                'point_reason.*.min' => 'Nilai minimal :min.',
+                'point_reason.*.max' => 'Nilai maksimal :max.',
+            ];
+        }
+
 
         // Validasi input
         $this->validate($rules, $messages);

@@ -15,4 +15,9 @@ class AnswerLevel3 extends Model
         'point_reason',
         'total_point',
     ];
+
+    public function soalLevel3()
+    {
+        return $this->belongsTo(SoalLevel3::class, 'soal_level3_id');
+    }
 }

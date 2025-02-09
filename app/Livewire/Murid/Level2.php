@@ -92,8 +92,8 @@ class Level2 extends Component
 
             $customFileName = null;
             if ($uploadedImage instanceof TemporaryUploadedFile) {
-                $customFileName = 'answer_soal_levle2' . $roleName . '_' . $id . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
-                $uploadedImage->storeAs('answer_soal_levle2', $customFileName, 'public');
+                $customFileName = 'answer_soal_level2' . $roleName . '_' . $id . '_' . time() . '.' . $uploadedImage->getClientOriginalExtension();
+                $uploadedImage->storeAs('answer_soal_level2', $customFileName, 'public');
             }
 
             $correctAnswer = SoalLevel2::where('id', $id)->value('correct_answer');
