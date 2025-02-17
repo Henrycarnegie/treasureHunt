@@ -125,6 +125,44 @@ class Level2 extends Component
         $this->clean_tmp();
     }
 
+
+    public function confirmDelete($id)
+    {
+        $this->id = $id;
+        $this->alert('warning', 'Apakah Anda Yakin Ingin Menghapus Soal Ini?', [
+            'position' => 'center',
+            'toast' => false,
+            'showConfirmButton' => true,
+            'confirmButtonText' => 'Ya, Hapus',
+            'showCancelButton' => true,
+            'cancelButtonText' => 'Batal',
+            'onConfirmed' => 'deleteConfirmed',
+        ]);
+    }
+
+    public function handleConfirm()
+    {
+        if ($this->id) {
+            $this->deletePermission($this->id);
+        }
+    }
+
+    public function deletePermission($id)
+    {
+        $soal = SoalLevel2::find($id);
+
+        if ($soal) {
+            $filePath = public_path('storage/soal_level1/' . $soal->question_image);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+            $soal->delete();
+            $this->alert('success', 'Berhasil Menghapus Soal.');
+        } else {
+            $this->alert('error', 'Soal Tidak Ditemukan.');
+        }
+    }
+
     public function clean_tmp(){
         $tmp = Storage::files('livewire-tmp');
         foreach($tmp as $t){
